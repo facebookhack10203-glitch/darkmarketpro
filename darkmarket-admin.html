@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DarkMarket Admin</title>
+<title>DarkMarketPro</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -17,437 +16,315 @@ font-family:Arial;
 body{
 background:#000;
 color:white;
-padding:20px;
-padding-bottom:100px;
 }
 
-h1{
-text-align:center;
-font-size:40px;
-color:#00ff88;
-margin-bottom:20px;
-}
-
-.box{
+.auth-box{
+width:90%;
+max-width:400px;
 background:#111;
-padding:20px;
+padding:25px;
 border-radius:20px;
-margin-top:20px;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+box-shadow:0 0 20px rgba(0,255,136,0.3);
 }
 
-.box h2{
-margin-bottom:15px;
+.auth-box h1{
+text-align:center;
+margin-bottom:20px;
+color:#00ff88;
 }
 
-input,select{
+.auth-box input{
 width:100%;
-padding:14px;
-margin-top:10px;
-background:#222;
+padding:15px;
+margin-top:12px;
 border:none;
 border-radius:12px;
+background:#222;
 color:white;
 font-size:16px;
 }
 
-button{
+.auth-box button{
 width:100%;
-padding:14px;
+padding:15px;
+margin-top:18px;
+border:none;
+border-radius:12px;
+background:#0066ff;
+color:white;
+font-size:18px;
+font-weight:bold;
+}
+
+.switch-text{
+margin-top:15px;
+text-align:center;
+font-size:14px;
+}
+
+.switch-text span{
+color:#00ff88;
+font-weight:bold;
+}
+
+#website{
+display:none;
+padding-bottom:100px;
+}
+
+header{
+padding:20px;
+text-align:center;
+font-size:40px;
+font-weight:bold;
+color:#00ff88;
+border-bottom:2px solid #00ff88;
+}
+
+.category-title{
+padding:20px;
+font-size:30px;
+font-weight:bold;
+}
+
+.products{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+padding:15px;
+}
+
+.card{
+background:#111;
+padding:15px;
+border-radius:20px;
+}
+
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:15px;
+}
+
+.card h2{
+margin-top:10px;
+font-size:20px;
+}
+
+.price{
+margin-top:8px;
+font-size:22px;
+font-weight:bold;
+color:#00ff88;
+}
+
+.buy-btn{
+width:100%;
+padding:12px;
 margin-top:12px;
 border:none;
 border-radius:12px;
-font-size:17px;
-font-weight:bold;
-color:white;
 background:#0066ff;
+color:white;
+font-size:16px;
+font-weight:bold;
 }
 
-.product{
-background:#1a1a1a;
-padding:15px;
-border-radius:15px;
-margin-top:15px;
-}
-
-.product img{
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
 width:100%;
-height:220px;
-object-fit:cover;
-border-radius:15px;
-margin-top:10px;
+background:#111;
+display:flex;
+justify-content:space-around;
+padding:15px 0;
+border-top:1px solid #222;
 }
 
-.edit-btn{
-background:orange;
+.bottom-nav div{
+text-align:center;
+font-size:16px;
+font-weight:bold;
 }
-
-.delete-btn{
-background:red;
-}
-
-.category{
-background:#1a1a1a;
-padding:12px;
-border-radius:12px;
-margin-top:10px;
-}
-
-.small-btn{
-padding:10px;
-font-size:14px;
-margin-top:8px;
-}
-
 </style>
 </head>
-
 <body>
 
-<h1>⚡ DarkMarket Admin</h1>
+<!-- LOGIN -->
 
-<!-- CATEGORY -->
+<div class="auth-box" id="loginBox">
 
-<div class="box">
+<h1>Login</h1>
 
-<h2>📂 Category Manager</h2>
+<input type="email" id="loginEmail" placeholder="Enter Gmail">
 
-<input type="text"
-id="categoryName"
-placeholder="New Category Name">
+<input type="password" id="loginPassword" placeholder="Enter Password">
 
-<button onclick="addCategory()">
-Add Category
-</button>
+<button onclick="login()">Login</button>
 
-<div id="categoryList"></div>
+<div class="switch-text">
+Don't have account?
+<span onclick="showRegister()">
+Create Account
+</span>
+</div>
 
 </div>
 
-<!-- PRODUCT -->
+<!-- REGISTER -->
 
-<div class="box">
+<div class="auth-box" id="registerBox" style="display:none;">
 
-<h2>📦 Product Manager</h2>
+<h1>Create Account</h1>
 
-<input type="text"
-id="productName"
-placeholder="Product Name">
+<input type="text" id="regName" placeholder="Your Name">
 
-<input type="text"
-id="productPrice"
-placeholder="Price">
+<input type="email" id="regEmail" placeholder="Enter Gmail">
 
-<input type="text"
-id="productImage"
-placeholder="Image URL">
+<input type="password" id="regPassword" placeholder="Create Password">
 
-<select id="productCategory">
-</select>
+<input type="password" id="regConfirm" placeholder="Confirm Password">
 
-<button onclick="addProduct()">
-Add Product
+<button onclick="register()">
+Create Account
 </button>
+
+<div class="switch-text">
+Already have account?
+<span onclick="showLogin()">
+Login
+</span>
+</div>
 
 </div>
 
-<!-- ALL PRODUCTS -->
+<!-- WEBSITE -->
 
-<div class="box">
+<div id="website">
 
-<h2>🔥 All Products</h2>
+<header>
+DarkMarketPro
+</header>
 
-<div id="products"></div>
+<div id="allCategories"></div>
+
+<div class="bottom-nav">
+<div>🏠<br>Home</div>
+<div>📜<br>History</div>
+<div>🛠️<br>Support</div>
+</div>
 
 </div>
 
 <script>
 
-/* CATEGORY */
-
-let categories =
-JSON.parse(
-localStorage.getItem("categories")
-) || ["Trending Products"];
-
-function saveCategories(){
-
-localStorage.setItem(
-"categories",
-JSON.stringify(categories)
-);
-
+function showRegister(){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("registerBox").style.display="block";
 }
 
-function showCategories(){
-
-let box =
-document.getElementById(
-"categoryList"
-);
-
-box.innerHTML="";
-
-let select =
-document.getElementById(
-"productCategory"
-);
-
-select.innerHTML="";
-
-categories.forEach((cat,index)=>{
-
-box.innerHTML += `
-
-<div class="category">
-
-<h3>${cat}</h3>
-
-<button class="edit-btn small-btn"
-onclick="editCategory(${index})">
-Edit
-</button>
-
-<button class="delete-btn small-btn"
-onclick="deleteCategory(${index})">
-Delete
-</button>
-
-</div>
-
-`;
-
-select.innerHTML += `
-<option value="${cat}">
-${cat}
-</option>
-`;
-
-});
-
+function showLogin(){
+document.getElementById("registerBox").style.display="none";
+document.getElementById("loginBox").style.display="block";
 }
 
-function addCategory(){
+function register(){
 
-let name =
-document.getElementById(
-"categoryName"
-).value;
+let name = document.getElementById("regName").value;
+let email = document.getElementById("regEmail").value;
+let pass = document.getElementById("regPassword").value;
+let confirm = document.getElementById("regConfirm").value;
 
-if(name==""){
-
-alert("Enter Category Name");
+if(name=="" || email=="" || pass=="" || confirm==""){
+alert("Fill all fields");
 return;
+}
+
+if(pass != confirm){
+alert("Password not match");
+return;
+}
+
+localStorage.setItem("userEmail",email);
+localStorage.setItem("userPassword",pass);
+
+alert("Account Created Successfully");
+
+showLogin();
 
 }
 
-categories.push(name);
+function login(){
 
-saveCategories();
+let email = document.getElementById("loginEmail").value;
+let pass = document.getElementById("loginPassword").value;
 
-showCategories();
+let savedEmail = localStorage.getItem("userEmail");
+let savedPass = localStorage.getItem("userPassword");
 
-document.getElementById(
-"categoryName"
-).value="";
+if(email == savedEmail && pass == savedPass){
 
+document.getElementById("loginBox").style.display="none";
+document.getElementById("website").style.display="block";
+
+showProducts();
+
+}else{
+alert("Wrong Email or Password");
+}
 }
 
-function deleteCategory(index){
+let products = JSON.parse(localStorage.getItem("products")) || [];
 
-categories.splice(index,1);
-
-saveCategories();
-
-showCategories();
-
-}
-
-function editCategory(index){
-
-let newName = prompt(
-"New Category Name",
-categories[index]
-);
-
-if(newName){
-
-categories[index]=newName;
-
-saveCategories();
-
-showCategories();
-
-}
-
-}
-
-/* PRODUCTS */
-
-let products =
-JSON.parse(
-localStorage.getItem("products")
-) || [];
-
-function saveProducts(){
-
-localStorage.setItem(
-"products",
-JSON.stringify(products)
-);
-
-}
+let container = document.getElementById("allCategories");
 
 function showProducts(){
 
-let box =
-document.getElementById(
-"products"
-);
+container.innerHTML = "";
 
-box.innerHTML="";
+let grouped = {};
 
-products.forEach((item,index)=>{
+products.forEach(item=>{
+
+if(!grouped[item.category]){
+grouped[item.category] = [];
+}
+
+grouped[item.category].push(item);
+
+});
+
+for(let category in grouped){
+
+container.innerHTML += `
+<div class="category-title">🔥 ${category}</div>
+<div class="products" id="${category}"></div>
+`;
+
+let box = document.getElementById(category);
+
+ grouped[category].forEach(product=>{
 
 box.innerHTML += `
-
-<div class="product">
-
-<h2>${item.name}</h2>
-
-<p>৳ ${item.price}</p>
-
-<p>📂 ${item.category}</p>
-
-<img src="${item.image}">
-
-<button class="edit-btn"
-onclick="editProduct(${index})">
-Edit Product
-</button>
-
-<button class="delete-btn"
-onclick="deleteProduct(${index})">
-Delete Product
-</button>
-
+<div class="card">
+<img src="${product.image}">
+<h2>${product.name}</h2>
+<div class="price">৳ ${product.price}</div>
+<button class="buy-btn">Buy Now</button>
 </div>
-
 `;
 
 });
 
 }
 
-function addProduct(){
-
-let name =
-document.getElementById(
-"productName"
-).value;
-
-let price =
-document.getElementById(
-"productPrice"
-).value;
-
-let image =
-document.getElementById(
-"productImage"
-).value;
-
-let category =
-document.getElementById(
-"productCategory"
-).value;
-
-if(
-name=="" ||
-price=="" ||
-image==""
-){
-
-alert("Fill All Fields");
-return;
-
 }
-
-products.push({
-
-name:name,
-price:price,
-image:image,
-category:category
-
-});
-
-saveProducts();
-
-showProducts();
-
-document.getElementById(
-"productName"
-).value="";
-
-document.getElementById(
-"productPrice"
-).value="";
-
-document.getElementById(
-"productImage"
-).value="";
-
-}
-
-function deleteProduct(index){
-
-products.splice(index,1);
-
-saveProducts();
-
-showProducts();
-
-}
-
-function editProduct(index){
-
-let newName = prompt(
-"New Product Name",
-products[index].name
-);
-
-let newPrice = prompt(
-"New Price",
-products[index].price
-);
-
-let newImage = prompt(
-"New Image URL",
-products[index].image
-);
-
-if(newName){
-products[index].name=newName;
-}
-
-if(newPrice){
-products[index].price=newPrice;
-}
-
-if(newImage){
-products[index].image=newImage;
-}
-
-saveProducts();
-
-showProducts();
-
-}
-
-/* LOAD */
-
-showCategories();
-
-showProducts();
 
 </script>
 
