@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="main">
+
+<div class="login-box">
+
+<h1>Create Account</h1>
+
+<input type="text"
+id="name"
+placeholder="Full Name">
+
+<input type="email"
+id="gmail"
+placeholder="Enter Gmail">
+
+<input type="password"
+id="password"
+placeholder="Create Password">
+
+<input type="password"
+id="confirmPassword"
+placeholder="Confirm Password">
+
+<div class="agree">
+
+<input type="checkbox"
+id="agree">
+
+<span>I Agree Terms & Conditions</span>
+
+</div>
+
+<button class="register-btn"
+id="createBtn">
+
+Create Account
+
+</button>
+
+<p class="create-text">
+
+Already have an account?
+
+<a href="index.html">
+Login
+</a>
+
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+document
+.getElementById("createBtn")
+.addEventListener("click", function(){
+
+let name =
+document.getElementById("name").value;
+
+let gmail =
+document.getElementById("gmail").value;
+
+let password =
+document.getElementById("password").value;
+
+let confirmPassword =
+document.getElementById("confirmPassword").value;
+
+let agree =
+document.getElementById("agree").checked;
+
+
+
+if(
+name === "" ||
+gmail === "" ||
+password === "" ||
+confirmPassword === ""
+){
+
+alert("Fill All Fields");
+return;
+
+}
+
+
+
+if(password !== confirmPassword){
+
+alert("Passwords Do Not Match");
+return;
+
+}
+
+
+
+if(!agree){
+
+alert("Accept Terms First");
+return;
+
+}
+
+
+
+localStorage.setItem("gmail", gmail);
+localStorage.setItem("password", password);
+
+alert("Account Created Successfully ✅");
+
+window.location.href = "index.html";
+
+});
+
+</script>
+
+</body>
+</html>
