@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DarkMarket Admin</title>
+
+<style>
+
+body{
+background:#000;
+color:white;
+font-family:Arial;
+padding:20px;
+}
+
+h1{
+color:#00ff88;
+margin-bottom:20px;
+}
+
+.box{
+background:#111;
+padding:20px;
+border-radius:20px;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:15px;
+margin-top:10px;
+border:none;
+border-radius:12px;
+background:#222;
+color:white;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:15px;
+background:#0066ff;
+color:white;
+font-size:18px;
+font-weight:bold;
+}
+
+.product{
+background:#222;
+padding:15px;
+border-radius:15px;
+margin-top:15px;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>⚡ DarkMarket Admin Panel</h1>
+
+<div class="box">
+
+<h2>Add Product</h2>
+
+<input type="text"
+id="name"
+placeholder="Product Name">
+
+<input type="text"
+id="price"
+placeholder="Price">
+
+<input type="text"
+id="image"
+placeholder="Image URL">
+
+<button onclick="addProduct()">
+Add Product
+</button>
+
+</div>
+
+<div class="box">
+
+<h2>All Products</h2>
+
+<div id="products"></div>
+
+</div>
+
+<script>
+
+let products=[];
+
+function addProduct(){
+
+let name=
+document.getElementById("name").value;
+
+let price=
+document.getElementById("price").value;
+
+let image=
+document.getElementById("image").value;
+
+if(name=="" || price=="" || image==""){
+
+alert("Fill all fields");
+return;
+
+}
+
+products.push({
+name,
+price,
+image
+});
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
+
+loadProducts();
+
+}
+
+function deleteProduct(index){
+
+products.splice(index,1);
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
+
+loadProducts();
+
+}
+
+function loadProducts(){
+
+let data=
+localStorage.getItem("products");
+
+if(data){
+
+products=JSON.parse(data);
+
+}
+
+let html="";
+
+products.forEach((item,index)=>{
+
+html += `
+
+<div class="product">
+
+<h3>${item.name}</h3>
+
+<p>৳ ${item.price}</p>
+
+<img src="${item.image}">
+
+<button onclick="deleteProduct(${index})">
+Delete
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("products")
+.innerHTML=html;
+
+}
+
+loadProducts();
+
+</script>
+
+</body>
+</html>
