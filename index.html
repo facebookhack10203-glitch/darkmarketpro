@@ -6,85 +6,107 @@
 <title>DarkMarketPro</title>
 
 <style>
-
-body{
+*{
 margin:0;
 padding:0;
-background:black;
-font-family:Arial;
+box-sizing:border-box;
+font-family:sans-serif;
+}
+
+body{
+background:#000;
 color:white;
-padding-bottom:90px;
+padding-bottom:100px;
 }
 
 header{
 text-align:center;
-padding:20px;
+padding:25px;
+font-size:28px;
+font-weight:bold;
+color:#00ff99;
 border-bottom:2px solid #00ff99;
 box-shadow:0 0 20px #00ff99;
 }
 
 .logo{
-width:120px;
-height:120px;
-object-fit:contain;
-display:block;
-margin:auto;
-border-radius:20px;
+display:flex;
+justify-content:center;
+margin-top:25px;
 }
 
-.title{
-font-size:50px;
-font-weight:bold;
-color:#00ff99;
-margin-top:10px;
+.logo img{
+width:180px;
+border-radius:20px;
 }
 
 .search-box{
-width:85%;
-margin:30px auto;
-background:#111;
-padding:18px;
-border-radius:20px;
-box-shadow:0 0 20px #00ff99;
+padding:20px;
 }
 
 .search-box input{
 width:100%;
-background:none;
+padding:18px;
 border:none;
-outline:none;
-color:white;
-font-size:24px;
-}
-
-.section-title{
-font-size:45px;
-font-weight:bold;
-margin:30px;
-}
-
-.category-box{
-width:90%;
-margin:auto;
+border-radius:18px;
 background:#111;
-padding:20px;
-border-radius:20px;
-margin-bottom:25px;
-box-shadow:0 0 15px #00ff99;
+color:white;
+font-size:20px;
+outline:none;
 }
 
-.category-name{
-font-size:35px;
+.category-title{
+font-size:40px;
 font-weight:bold;
-margin-bottom:15px;
-color:#00ff99;
+padding:20px;
 }
 
-.empty-text{
-font-size:24px;
-color:gray;
+.products{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+padding:10px;
+}
+
+.product{
+background:#111;
+width:170px;
+border-radius:20px;
+padding:15px;
 text-align:center;
-padding:40px 0;
+box-shadow:0 0 15px #00ff9950;
+}
+
+.product img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:15px;
+}
+
+.product h3{
+margin-top:10px;
+font-size:24px;
+}
+
+.product p{
+color:#00ff99;
+font-size:28px;
+margin-top:10px;
+font-weight:bold;
+}
+
+.buy-btn{
+margin-top:15px;
+background:#0066ff;
+color:white;
+border:none;
+padding:15px;
+width:100%;
+border-radius:15px;
+font-size:22px;
+font-weight:bold;
 }
 
 .bottom-nav{
@@ -95,105 +117,133 @@ width:100%;
 background:#111;
 display:flex;
 justify-content:space-around;
-padding:14px 0;
-border-top:1px solid #333;
+padding:15px 0;
+border-top:1px solid #222;
 }
 
-.bottom-nav button{
-background:none;
-border:none;
+.nav-btn{
 color:white;
-font-size:20px;
-font-weight:bold;
+font-size:18px;
+text-align:center;
+cursor:pointer;
 }
 
+.section{
+display:none;
+padding:20px;
+}
+
+.active{
+display:block;
+}
+
+.history-box{
+background:#111;
+padding:20px;
+border-radius:20px;
+margin-top:20px;
+font-size:22px;
+text-align:center;
+}
+
+.support-btn{
+display:block;
+background:#0088cc;
+padding:18px;
+border-radius:15px;
+text-align:center;
+color:white;
+font-size:24px;
+font-weight:bold;
+text-decoration:none;
+margin-top:30px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-
-<img src="logo.png" class="logo">
-
-<div class="title">
 DarkMarketPro
+</header>
+
+<div class="logo">
+<img src="logo.png">
 </div>
 
-</header>
+<div id="homePage" class="active">
 
 <div class="search-box">
 <input type="text" placeholder="🔎 Search Products">
 </div>
 
-<div class="section-title">
+<div class="category-title">
 🔥 Trending Products
 </div>
 
-<div class="category-box">
+<div class="products" id="products">
 
-<div class="category-name">
-📱 Mobile
-</div>
-
-<div class="empty-text">
-No Products Added
 </div>
 
 </div>
 
-<div class="category-box">
+<div id="historyPage" class="section">
 
-<div class="category-name">
-💻 Laptop
+<h1>📜 Order History</h1>
+
+<div class="history-box" id="historyBox">
+No Order History
 </div>
 
-<div class="empty-text">
-No Products Added
 </div>
 
-</div>
+<div id="supportPage" class="section">
 
-<div class="category-box">
+<h1>🛠 Support</h1>
 
-<div class="category-name">
-🎮 Gaming
-</div>
-
-<div class="empty-text">
-No Products Added
-</div>
+<a class="support-btn" href="https://t.me/Yangchun11">
+Contact Telegram Support
+</a>
 
 </div>
 
 <div class="bottom-nav">
 
-<button onclick="goHome()">
+<div class="nav-btn" onclick="showHome()">
 🏠<br>Home
-</button>
+</div>
 
-<button onclick="showHistory()">
+<div class="nav-btn" onclick="showHistory()">
 📜<br>History
-</button>
+</div>
 
-<button onclick="openSupport()">
-🛠️<br>Support
-</button>
+<div class="nav-btn" onclick="showSupport()">
+🛠<br>Support
+</div>
 
 </div>
 
 <script>
 
-function goHome(){
-window.location.href="index.html";
+function hideAll(){
+document.getElementById("homePage").classList.remove("active");
+document.getElementById("historyPage").classList.remove("active");
+document.getElementById("supportPage").classList.remove("active");
+}
+
+function showHome(){
+hideAll();
+document.getElementById("homePage").classList.add("active");
 }
 
 function showHistory(){
-alert("No History Yet");
+hideAll();
+document.getElementById("historyPage").classList.add("active");
 }
 
-function openSupport(){
-window.location.href="https://t.me/yourusername";
+function showSupport(){
+hideAll();
+document.getElementById("supportPage").classList.add("active");
 }
 
 </script>
