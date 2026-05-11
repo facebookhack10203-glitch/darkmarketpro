@@ -3,77 +3,119 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Account</title>
 
-<link rel="stylesheet" href="style.css">
+<title>Register</title>
 
+<style>
+
+body{
+margin:0;
+padding:0;
+background:black;
+font-family:Arial;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.register-box{
+width:90%;
+max-width:400px;
+background:#111;
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 20px #00ff99;
+}
+
+h1{
+text-align:center;
+color:#00ff99;
+margin-bottom:25px;
+}
+
+input{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:15px;
+background:#222;
+color:white;
+font-size:18px;
+box-sizing:border-box;
+outline:none;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+border:none;
+border-radius:15px;
+background:#00aa66;
+color:white;
+font-size:20px;
+font-weight:bold;
+}
+
+.login-link{
+text-align:center;
+margin-top:20px;
+}
+
+.login-link a{
+color:#00ff99;
+text-decoration:none;
+font-size:18px;
+}
+
+</style>
 </head>
 
 <body>
 
-<div class="main">
-
-<div class="login-box">
+<div class="register-box">
 
 <h1>Create Account</h1>
 
 <input type="text"
 id="name"
-placeholder="Full Name">
+placeholder="Your Name">
 
 <input type="email"
-id="gmail"
-placeholder="Enter Gmail">
+id="email"
+placeholder="Your Email">
 
 <input type="password"
 id="password"
-placeholder="Create Password">
+placeholder="Password">
 
 <input type="password"
 id="confirmPassword"
 placeholder="Confirm Password">
 
-<div class="agree">
-
-<input type="checkbox"
-id="agree">
-
-<span>I Agree Terms & Conditions</span>
-
-</div>
-
-<button class="register-btn"
-id="createBtn">
-
+<button onclick="register()">
 Create Account
-
 </button>
 
-<p class="create-text">
-
-Already have an account?
-
+<div class="login-link">
 <a href="index.html">
-Login
+Already have an account?
 </a>
-
-</p>
-
 </div>
 
 </div>
 
 <script>
 
-document
-.getElementById("createBtn")
-.addEventListener("click", function(){
+function register(){
 
 let name =
 document.getElementById("name").value;
 
-let gmail =
-document.getElementById("gmail").value;
+let email =
+document.getElementById("email").value;
 
 let password =
 document.getElementById("password").value;
@@ -81,51 +123,34 @@ document.getElementById("password").value;
 let confirmPassword =
 document.getElementById("confirmPassword").value;
 
-let agree =
-document.getElementById("agree").checked;
-
-
-
 if(
 name === "" ||
-gmail === "" ||
+email === "" ||
 password === "" ||
 confirmPassword === ""
 ){
 
-alert("Fill All Fields");
+alert("Fill all fields");
 return;
 
 }
-
-
 
 if(password !== confirmPassword){
 
-alert("Passwords Do Not Match");
+alert("Password Not Match");
 return;
 
 }
 
+localStorage.setItem("userName",name);
+localStorage.setItem("userEmail",email);
+localStorage.setItem("userPassword",password);
 
+alert("Account Created Successfully");
 
-if(!agree){
-
-alert("Accept Terms First");
-return;
+window.location.href="index.html";
 
 }
-
-
-
-localStorage.setItem("gmail", gmail);
-localStorage.setItem("password", password);
-
-alert("Account Created Successfully ✅");
-
-window.location.href = "index.html";
-
-});
 
 </script>
 
