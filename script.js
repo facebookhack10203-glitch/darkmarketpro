@@ -7,6 +7,8 @@ JSON.parse(localStorage.getItem("products")) || [];
 const categoriesContainer =
 document.getElementById("categoriesContainer");
 
+let currentProduct = "";
+
 function loadProducts(){
 
 if(!categoriesContainer) return;
@@ -57,7 +59,7 @@ productHTML += `
 <p>৳ ${product.price}</p>
 
 <button class="buy-btn"
-onclick="buyProduct('${product.name}')">
+onclick="openOrderForm('${product.name}')">
 
 Buy Now
 
@@ -91,21 +93,114 @@ ${productHTML}
 
 }
 
-function buyProduct(productName){
+function openOrderForm(productName){
+
+currentProduct = productName;
+
+showPage('orderPage');
+
+}
+
+function continuePayment(){
+
+let fullName =
+document.getElementById("fullName").value;
+
+let district =
+document.getElementById("district").value;
+
+let village =
+document.getElementById("village").value;
+
+let phone =
+document.getElementById("phone").value;
+
+if(
+fullName === "" ||
+district === "" ||
+village === "" ||
+phone === ""
+){
+
+alert("Fill All Fields");
+return;
+
+}
+
+showPage('paymentPage');
+
+}
+
+function copyNumber(){
+
+navigator.clipboard.writeText(
+"01944875610"
+);
+
+alert("Number Copied");
+
+}
+
+function submitOrder(){
+
+let trxid =
+document.getElementById("trxid").value;
+
+let paymentMethod =
+document.getElementById("paymentMethod").value;
+
+if(trxid === ""){
+
+alert("Enter Transaction ID");
+return;
+
+}
 
 let orders =
+JSON.parse(localStorage.getItem("adminOrders")) || [];
+
+orders.push({
+
+product: currentProduct,
+
+name:
+document.getElementById("fullName").value,
+
+district:
+document.getElementById("district").value,
+
+village:
+document.getElementById("village").value,
+
+phone:
+document.getElementById("phone").value,
+
+trxid,
+paymentMethod,
+status:"Pending"
+
+});
+
+localStorage.setItem(
+"adminOrders",
+JSON.stringify(orders)
+);
+
+let history =
 JSON.parse(localStorage.getItem("orders")) || [];
 
-orders.push(productName);
+history.push(currentProduct);
 
 localStorage.setItem(
 "orders",
-JSON.stringify(orders)
+JSON.stringify(history)
 );
 
 loadOrders();
 
-alert(productName + " Ordered");
+alert("Order Submitted Successfully");
+
+showPage('homePage');
 
 }
 
