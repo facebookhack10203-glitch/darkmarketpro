@@ -1,194 +1,451 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>DarkMarket Admin</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DarkMarket Admin</title>
 
-  <style>
-    body{
-      background:#000;
-      color:white;
-      font-family:Arial;
-      padding:20px;
-    }
+<style>
 
-    h1{
-      color:#00ff88;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
 
-    .box{
-      background:#111;
-      padding:20px;
-      border-radius:15px;
-      margin-top:20px;
-    }
+body{
+background:#000;
+color:white;
+padding:20px;
+padding-bottom:100px;
+}
 
-    input{
-      width:100%;
-      padding:12px;
-      margin-top:10px;
-      background:#222;
-      border:none;
-      color:white;
-      border-radius:10px;
-    }
+h1{
+text-align:center;
+font-size:40px;
+color:#00ff88;
+margin-bottom:20px;
+}
 
-    button{
-      width:100%;
-      padding:12px;
-      margin-top:10px;
-      border:none;
-      border-radius:10px;
-      background:#0066ff;
-      color:white;
-      font-size:16px;
-    }
+.box{
+background:#111;
+padding:20px;
+border-radius:20px;
+margin-top:20px;
+}
 
-    .product{
-      background:#1a1a1a;
-      padding:15px;
-      border-radius:10px;
-      margin-top:15px;
-    }
+.box h2{
+margin-bottom:15px;
+}
 
-    img{
-      width:100%;
-      border-radius:10px;
-      margin-top:10px;
-    }
+input,select{
+width:100%;
+padding:14px;
+margin-top:10px;
+background:#222;
+border:none;
+border-radius:12px;
+color:white;
+font-size:16px;
+}
 
-    .edit{
-      background:orange;
-      margin-top:10px;
-    }
+button{
+width:100%;
+padding:14px;
+margin-top:12px;
+border:none;
+border-radius:12px;
+font-size:17px;
+font-weight:bold;
+color:white;
+background:#0066ff;
+}
 
-    .delete{
-      background:red;
-      margin-top:10px;
-    }
-  </style>
+.product{
+background:#1a1a1a;
+padding:15px;
+border-radius:15px;
+margin-top:15px;
+}
+
+.product img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:15px;
+margin-top:10px;
+}
+
+.edit-btn{
+background:orange;
+}
+
+.delete-btn{
+background:red;
+}
+
+.category{
+background:#1a1a1a;
+padding:12px;
+border-radius:12px;
+margin-top:10px;
+}
+
+.small-btn{
+padding:10px;
+font-size:14px;
+margin-top:8px;
+}
+
+</style>
 </head>
 
 <body>
 
-<h1>⚡ DarkMarket Admin Panel</h1>
+<h1>⚡ DarkMarket Admin</h1>
+
+<!-- CATEGORY -->
 
 <div class="box">
-  <h2>Add Product</h2>
 
-  <input type="text" id="name" placeholder="Product Name">
+<h2>📂 Category Manager</h2>
 
-  <input type="text" id="price" placeholder="Price">
+<input type="text"
+id="categoryName"
+placeholder="New Category Name">
 
-  <input type="text" id="image" placeholder="Image URL">
+<button onclick="addCategory()">
+Add Category
+</button>
 
-  <button onclick="addProduct()">Add Product</button>
+<div id="categoryList"></div>
+
 </div>
 
-<div class="box">
-  <h2>All Products</h2>
+<!-- PRODUCT -->
 
-  <div id="products"></div>
+<div class="box">
+
+<h2>📦 Product Manager</h2>
+
+<input type="text"
+id="productName"
+placeholder="Product Name">
+
+<input type="text"
+id="productPrice"
+placeholder="Price">
+
+<input type="text"
+id="productImage"
+placeholder="Image URL">
+
+<select id="productCategory">
+</select>
+
+<button onclick="addProduct()">
+Add Product
+</button>
+
+</div>
+
+<!-- ALL PRODUCTS -->
+
+<div class="box">
+
+<h2>🔥 All Products</h2>
+
+<div id="products"></div>
+
 </div>
 
 <script>
 
-let products = JSON.parse(localStorage.getItem("products")) || [];
+/* CATEGORY */
+
+let categories =
+JSON.parse(
+localStorage.getItem("categories")
+) || ["Trending Products"];
+
+function saveCategories(){
+
+localStorage.setItem(
+"categories",
+JSON.stringify(categories)
+);
+
+}
+
+function showCategories(){
+
+let box =
+document.getElementById(
+"categoryList"
+);
+
+box.innerHTML="";
+
+let select =
+document.getElementById(
+"productCategory"
+);
+
+select.innerHTML="";
+
+categories.forEach((cat,index)=>{
+
+box.innerHTML += `
+
+<div class="category">
+
+<h3>${cat}</h3>
+
+<button class="edit-btn small-btn"
+onclick="editCategory(${index})">
+Edit
+</button>
+
+<button class="delete-btn small-btn"
+onclick="deleteCategory(${index})">
+Delete
+</button>
+
+</div>
+
+`;
+
+select.innerHTML += `
+<option value="${cat}">
+${cat}
+</option>
+`;
+
+});
+
+}
+
+function addCategory(){
+
+let name =
+document.getElementById(
+"categoryName"
+).value;
+
+if(name==""){
+
+alert("Enter Category Name");
+return;
+
+}
+
+categories.push(name);
+
+saveCategories();
+
+showCategories();
+
+document.getElementById(
+"categoryName"
+).value="";
+
+}
+
+function deleteCategory(index){
+
+categories.splice(index,1);
+
+saveCategories();
+
+showCategories();
+
+}
+
+function editCategory(index){
+
+let newName = prompt(
+"New Category Name",
+categories[index]
+);
+
+if(newName){
+
+categories[index]=newName;
+
+saveCategories();
+
+showCategories();
+
+}
+
+}
+
+/* PRODUCTS */
+
+let products =
+JSON.parse(
+localStorage.getItem("products")
+) || [];
 
 function saveProducts(){
-  localStorage.setItem("products", JSON.stringify(products));
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
+
 }
 
 function showProducts(){
 
-  let box = document.getElementById("products");
+let box =
+document.getElementById(
+"products"
+);
 
-  box.innerHTML = "";
+box.innerHTML="";
 
-  products.forEach((item,index)=>{
+products.forEach((item,index)=>{
 
-    box.innerHTML += `
-    
-    <div class="product">
+box.innerHTML += `
 
-      <h3>${item.name}</h3>
+<div class="product">
 
-      <p>${item.price}</p>
+<h2>${item.name}</h2>
 
-      <img src="${item.image}">
+<p>৳ ${item.price}</p>
 
-      <button class="edit" onclick="editProduct(${index})">
-      Edit
-      </button>
+<p>📂 ${item.category}</p>
 
-      <button class="delete" onclick="deleteProduct(${index})">
-      Delete
-      </button>
+<img src="${item.image}">
 
-    </div>
+<button class="edit-btn"
+onclick="editProduct(${index})">
+Edit Product
+</button>
 
-    `;
-  });
+<button class="delete-btn"
+onclick="deleteProduct(${index})">
+Delete Product
+</button>
+
+</div>
+
+`;
+
+});
 
 }
 
 function addProduct(){
 
-  let name = document.getElementById("name").value;
+let name =
+document.getElementById(
+"productName"
+).value;
 
-  let price = document.getElementById("price").value;
+let price =
+document.getElementById(
+"productPrice"
+).value;
 
-  let image = document.getElementById("image").value;
+let image =
+document.getElementById(
+"productImage"
+).value;
 
-  if(name=="" || price=="" || image==""){
-    alert("সব ঘর পূরণ করো");
-    return;
-  }
+let category =
+document.getElementById(
+"productCategory"
+).value;
 
-  products.push({
-    name:name,
-    price:price,
-    image:image
-  });
+if(
+name=="" ||
+price=="" ||
+image==""
+){
 
-  saveProducts();
+alert("Fill All Fields");
+return;
 
-  showProducts();
+}
 
-  document.getElementById("name").value="";
-  document.getElementById("price").value="";
-  document.getElementById("image").value="";
+products.push({
+
+name:name,
+price:price,
+image:image,
+category:category
+
+});
+
+saveProducts();
+
+showProducts();
+
+document.getElementById(
+"productName"
+).value="";
+
+document.getElementById(
+"productPrice"
+).value="";
+
+document.getElementById(
+"productImage"
+).value="";
 
 }
 
 function deleteProduct(index){
 
-  products.splice(index,1);
+products.splice(index,1);
 
-  saveProducts();
+saveProducts();
 
-  showProducts();
+showProducts();
 
 }
 
 function editProduct(index){
 
-  let newName = prompt("New Product Name", products[index].name);
+let newName = prompt(
+"New Product Name",
+products[index].name
+);
 
-  let newPrice = prompt("New Price", products[index].price);
+let newPrice = prompt(
+"New Price",
+products[index].price
+);
 
-  let newImage = prompt("New Image URL", products[index].image);
+let newImage = prompt(
+"New Image URL",
+products[index].image
+);
 
-  products[index] = {
-    name:newName,
-    price:newPrice,
-    image:newImage
-  };
+if(newName){
+products[index].name=newName;
+}
 
-  saveProducts();
+if(newPrice){
+products[index].price=newPrice;
+}
 
-  showProducts();
+if(newImage){
+products[index].image=newImage;
+}
+
+saveProducts();
+
+showProducts();
 
 }
+
+/* LOAD */
+
+showCategories();
 
 showProducts();
 
