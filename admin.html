@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+
+<style>
+
+body{
+background:#000;
+color:white;
+font-family:Arial;
+padding:20px;
+}
+
+.box{
+background:#111;
+padding:20px;
+border-radius:20px;
+margin-top:20px;
+}
+
+h1{
+color:#00ff88;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:15px;
+background:#0066ff;
+color:white;
+font-size:18px;
+margin-top:15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>DarkMarketPro Admin</h1>
+
+<div class="box">
+
+<h2>Total Orders</h2>
+
+<p id="orders">0</p>
+
+<button onclick="loadOrders()">
+Refresh Orders
+</button>
+
+</div>
+
+<div class="box">
+
+<h2>All Orders</h2>
+
+<div id="list"></div>
+
+</div>
+
+<script>
+
+function loadOrders(){
+
+let data =
+localStorage.getItem("orders");
+
+if(!data){
+
+document.getElementById("list")
+.innerHTML="No Orders";
+
+return;
+
+}
+
+let orders = JSON.parse(data);
+
+document.getElementById("orders")
+.innerText = orders.length;
+
+let html="";
+
+orders.forEach(order=>{
+
+html += `
+
+<div style="
+background:#222;
+padding:15px;
+border-radius:15px;
+margin-top:15px;
+">
+
+<h3>${order.product}</h3>
+
+<p>Price: ৳ ${order.price}</p>
+
+<p>TRX ID: ${order.trx}</p>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("list")
+.innerHTML = html;
+
+}
+
+loadOrders();
+
+</script>
+
+</body>
+</html>
