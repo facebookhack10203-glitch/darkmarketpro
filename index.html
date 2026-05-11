@@ -7,244 +7,151 @@
 
 <style>
 
-*{
+body{
 margin:0;
 padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
 background:#000;
+font-family:Arial;
 color:white;
-padding-bottom:100px;
+padding-bottom:90px;
 }
 
-/* HEADER */
-
-header{
-background:#0b0b0b;
-padding:25px;
+.header{
 text-align:center;
-border-bottom:2px solid #00ff88;
-box-shadow:0 0 20px #00ff88;
+padding:25px;
+font-size:40px;
+font-weight:bold;
+color:#00ff99;
+border-bottom:2px solid #00ff99;
+box-shadow:0 0 20px #00ff99;
 }
 
-header h1{
-font-size:45px;
-color:#00ff88;
+.page{
+display:none;
+padding:20px;
 }
 
-/* SEARCH */
+.page.active{
+display:block;
+}
 
 .search-box{
-padding:20px;
+margin-top:20px;
 }
 
 .search-box input{
 width:100%;
 padding:18px;
 border:none;
-border-radius:18px;
+border-radius:20px;
 background:#111;
 color:white;
-font-size:18px;
+font-size:22px;
 outline:none;
 }
 
-/* TITLE */
-
 .section-title{
-font-size:30px;
-font-weight:bold;
-padding:20px;
+font-size:34px;
+margin-top:30px;
+margin-bottom:20px;
 }
-
-/* PRODUCTS */
 
 .products{
 display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-padding:15px;
+grid-template-columns:1fr;
+gap:20px;
 }
 
-.card{
+.product{
 background:#111;
 padding:15px;
-border-radius:22px;
-text-align:center;
-box-shadow:0 0 12px rgba(255,255,255,0.08);
+border-radius:20px;
 }
 
-.card img{
+.product img{
 width:100%;
-height:190px;
-object-fit:cover;
-border-radius:18px;
+border-radius:15px;
 }
 
-.card h3{
-margin-top:15px;
+.product h3{
+font-size:28px;
+}
+
+.product p{
 font-size:22px;
-}
-
-.price{
-font-size:26px;
-font-weight:bold;
-color:#00ff88;
-margin-top:10px;
+color:#00ff99;
 }
 
 .buy-btn{
-width:100%;
-padding:14px;
-margin-top:15px;
-border:none;
-border-radius:16px;
-background:#0066ff;
-color:white;
-font-size:20px;
-font-weight:bold;
-cursor:pointer;
-}
-
-/* SOCIAL */
-
-.social-links{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
+display:block;
+text-align:center;
 padding:15px;
+background:#00aa66;
+color:white;
+text-decoration:none;
+border-radius:15px;
+font-size:22px;
+font-weight:bold;
+margin-top:10px;
+border:none;
 }
 
-.social-card{
+.history-box{
 background:#111;
-padding:18px;
+padding:30px;
 border-radius:20px;
+font-size:26px;
+text-align:center;
+margin-top:50px;
+}
+
+.support-box{
+margin-top:60px;
 text-align:center;
 }
 
-.social-card h3{
-font-size:20px;
-margin-bottom:10px;
-}
-
-/* MODAL */
-
-.modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.92);
-z-index:99999;
-padding:20px;
-overflow:auto;
-}
-
-.modal-content{
-background:#111;
-padding:20px;
+.support-btn{
+display:inline-block;
+padding:20px 30px;
+background:#0088cc;
+color:white;
+font-size:26px;
+font-weight:bold;
+text-decoration:none;
 border-radius:20px;
-margin-top:40px;
 }
 
-.modal h2{
-margin-bottom:20px;
-text-align:center;
-color:#00ff88;
-}
-
-.modal input{
-width:100%;
-padding:15px;
-margin-top:12px;
-border:none;
-border-radius:14px;
-background:#222;
-color:white;
-font-size:16px;
-outline:none;
-}
-
-.confirm-btn{
-width:100%;
-padding:15px;
-margin-top:18px;
-border:none;
-border-radius:15px;
-background:#00aa55;
-color:white;
-font-size:18px;
-font-weight:bold;
-}
-
-.close-btn{
-width:100%;
-padding:14px;
-margin-top:12px;
-border:none;
-border-radius:15px;
-background:red;
-color:white;
-font-size:17px;
-font-weight:bold;
-}
-
-/* PAYMENT */
-
-.payment-number{
-font-size:32px;
-text-align:center;
-color:#00ff88;
-margin:20px 0;
-font-weight:bold;
-}
-
-/* HISTORY */
-
-.history-item{
-background:#222;
-padding:15px;
-border-radius:15px;
-margin-top:15px;
-}
-
-/* BOTTOM MENU */
-
-.bottom-menu{
+.bottom-nav{
 position:fixed;
 bottom:0;
 left:0;
 width:100%;
-background:#0d0d0d;
+background:#111;
 display:flex;
 justify-content:space-around;
-align-items:center;
-padding:10px 0;
-border-top:1px solid #222;
-z-index:9999;
+padding:12px 0;
+border-top:1px solid #333;
 }
 
-.menu-btn{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-decoration:none;
-color:white;
-font-size:14px;
-font-weight:bold;
-gap:4px;
+.nav-btn{
 background:none;
 border:none;
+color:white;
+font-size:20px;
+font-weight:bold;
 }
 
-.menu-btn span{
-font-size:24px;
+.admin-btn{
+position:fixed;
+top:15px;
+right:15px;
+background:#00aa66;
+padding:12px 18px;
+border-radius:15px;
+text-decoration:none;
+color:white;
+font-weight:bold;
+z-index:999;
 }
 
 </style>
@@ -252,420 +159,201 @@ font-size:24px;
 
 <body>
 
-<header>
-<h1>DarkMarketPro</h1>
-</header>
+<a href="admin.html" class="admin-btn">
+Admin
+</a>
 
-<!-- SEARCH -->
+<div class="header">
+DarkMarketPro
+</div>
+
+<!-- HOME PAGE -->
+
+<div id="homePage" class="page active">
 
 <div class="search-box">
-<input type="text" placeholder="🔍 Search Products">
+<input type="text" placeholder="🔎 Search Products">
 </div>
 
-<!-- PRODUCTS -->
-
-<div class="section-title">
+<h2 class="section-title">
 🔥 Trending Products
-</div>
-
-<div class="products">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
-<h3>iPhone 15 Pro</h3>
-<div class="price">৳ 85000</div>
-
-<button class="buy-btn"
-onclick="openProductOrder(
-'iPhone 15 Pro',
-85000
-)">
-Buy Now
-</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853">
-<h3>Gaming Laptop</h3>
-<div class="price">৳ 65000</div>
-
-<button class="buy-btn"
-onclick="openProductOrder(
-'Gaming Laptop',
-65000
-)">
-Buy Now
-</button>
-</div>
-
-</div>
-
-<!-- SOCIAL PRODUCTS -->
-
-<div class="section-title">
-📦 Social Products
-</div>
-
-<div class="social-links">
-
-<div class="social-card">
-<h3>📘 Facebook Followers</h3>
-<div class="price">৳ 300</div>
-
-<button class="buy-btn"
-onclick="openSocialOrder(
-'Facebook Followers',
-300
-)">
-Buy Now
-</button>
-</div>
-
-<div class="social-card">
-<h3>🎵 TikTok Followers</h3>
-<div class="price">৳ 400</div>
-
-<button class="buy-btn"
-onclick="openSocialOrder(
-'TikTok Followers',
-400
-)">
-Buy Now
-</button>
-</div>
-
-<div class="social-card">
-<h3>▶️ YouTube Subscribers</h3>
-<div class="price">৳ 500</div>
-
-<button class="buy-btn"
-onclick="openSocialOrder(
-'YouTube Subscribers',
-500
-)">
-Buy Now
-</button>
-</div>
-
-<div class="social-card">
-<h3>📸 Instagram Followers</h3>
-<div class="price">৳ 350</div>
-
-<button class="buy-btn"
-onclick="openSocialOrder(
-'Instagram Followers',
-350
-)">
-Buy Now
-</button>
-</div>
-
-</div>
-
-<!-- PRODUCT ORDER -->
-
-<div class="modal"
-id="productModal">
-
-<div class="modal-content">
-
-<h2 id="productTitle">
-Product Order
 </h2>
 
-<input type="text"
-placeholder="Your Name">
-
-<input type="text"
-placeholder="Mobile Number">
-
-<input type="text"
-placeholder="District">
-
-<input type="text"
-placeholder="Village / Address">
-
-<button class="confirm-btn"
-onclick="continueProductPayment()">
-Continue Payment
-</button>
-
-<button class="close-btn"
-onclick="closeProductOrder()">
-Close
-</button>
+<div class="products" id="productsContainer">
 
 </div>
+
 </div>
 
-<!-- SOCIAL ORDER -->
+<!-- HISTORY PAGE -->
 
-<div class="modal"
-id="socialModal">
+<div id="historyPage" class="page">
 
-<div class="modal-content">
-
-<h2 id="socialTitle">
-Social Order
+<h2 class="section-title">
+📜 Order History
 </h2>
 
-<input type="text"
-id="socialLink"
-placeholder="Facebook / TikTok Link">
-
-<input type="number"
-id="socialQty"
-placeholder="How Many?">
-
-<button class="confirm-btn"
-onclick="continueSocialPayment()">
-Confirm Order
-</button>
-
-<button class="close-btn"
-onclick="closeSocialOrder()">
-Close
-</button>
-
-</div>
-</div>
-
-<!-- PAYMENT -->
-
-<div class="modal"
-id="paymentModal">
-
-<div class="modal-content">
-
-<h2>💳 Payment</h2>
-
-<div class="payment-number">
-01944875610
-</div>
-
-<input type="text"
-id="trxid"
-placeholder="Enter Transaction ID">
-
-<button class="confirm-btn"
-onclick="confirmPayment()">
-Confirm Payment
-</button>
-
-<button class="close-btn"
-onclick="closePayment()">
-Close
-</button>
-
-</div>
-</div>
-
-<!-- HISTORY -->
-
-<div class="modal"
-id="historyModal">
-
-<div class="modal-content">
-
-<h2>📜 Order History</h2>
-
-<div id="historyList">
-
-<div class="history-item">
-No Orders Yet
+<div id="historyContent" class="history-box">
+এখনো পর্যন্ত কোনো অর্ডার করা হয়নি
 </div>
 
 </div>
 
-<button class="close-btn"
-onclick="closeHistory()">
-Close
-</button>
+<!-- SUPPORT PAGE -->
 
-</div>
-</div>
+<div id="supportPage" class="page">
 
-<!-- BOTTOM MENU -->
+<h2 class="section-title">
+🛠 Support
+</h2>
 
-<div class="bottom-menu">
+<div class="support-box">
 
-<a href="#"
-class="menu-btn">
-<span>🏠</span>
-Home
+<a class="support-btn"
+href="https://t.me/Yangchun11"
+target="_blank">
+
+📩 Contact Telegram Support
+
 </a>
 
-<button onclick="openHistory()"
-class="menu-btn">
-<span>📜</span>
-History
+</div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+<button class="nav-btn"
+onclick="showPage('homePage')">
+
+🏠 Home
+
 </button>
 
-<a href="https://t.me/Yangchun11"
-class="menu-btn">
-<span>🛠️</span>
-Support
-</a>
+<button class="nav-btn"
+onclick="showPage('historyPage')">
+
+📜 History
+
+</button>
+
+<button class="nav-btn"
+onclick="showPage('supportPage')">
+
+🛠 Support
+
+</button>
 
 </div>
 
 <script>
 
-let currentOrder="";
-let currentPrice="";
+function showPage(pageId){
 
-/* PRODUCT */
+document.querySelectorAll('.page').forEach(page=>{
+page.classList.remove('active');
+});
 
-function openProductOrder(name,price){
-
-currentOrder=name;
-currentPrice=price;
-
-document.getElementById(
-"productModal"
-).style.display="block";
-
-document.getElementById(
-"productTitle"
-).innerHTML=
-name+" - ৳"+price;
+document.getElementById(pageId).classList.add('active');
 
 }
 
-function closeProductOrder(){
+const products = JSON.parse(localStorage.getItem("products")) || [];
 
-document.getElementById(
-"productModal"
-).style.display="none";
+const productsContainer = document.getElementById("productsContainer");
 
-}
+if(products.length === 0){
 
-function continueProductPayment(){
+productsContainer.innerHTML = `
+<div class="history-box">
+No Products Added
+</div>
+`;
 
-closeProductOrder();
+}else{
 
-document.getElementById(
-"paymentModal"
-).style.display="block";
+products.forEach(product=>{
 
-}
+productsContainer.innerHTML += `
 
-/* SOCIAL */
+<div class="product">
 
-function openSocialOrder(name,price){
+<img src="${product.image}">
 
-currentOrder=name;
-currentPrice=price;
+<h3>${product.name}</h3>
 
-document.getElementById(
-"socialModal"
-).style.display="block";
+<p>৳ ${product.price}</p>
 
-document.getElementById(
-"socialTitle"
-).innerHTML=
-name+" - ৳"+price;
+<button class="buy-btn"
+onclick="addOrder('${product.name}')">
 
-}
+Buy Now
 
-function closeSocialOrder(){
-
-document.getElementById(
-"socialModal"
-).style.display="none";
-
-}
-
-function continueSocialPayment(){
-
-let link=
-document.getElementById(
-"socialLink"
-).value;
-
-let qty=
-document.getElementById(
-"socialQty"
-).value;
-
-if(link=="" || qty==""){
-
-alert("Fill All Fields");
-return;
-
-}
-
-closeSocialOrder();
-
-document.getElementById(
-"paymentModal"
-).style.display="block";
-
-}
-
-/* PAYMENT */
-
-function closePayment(){
-
-document.getElementById(
-"paymentModal"
-).style.display="none";
-
-}
-
-function confirmPayment(){
-
-let trx=
-document.getElementById(
-"trxid"
-).value;
-
-if(trx==""){
-
-alert("Enter Transaction ID");
-return;
-
-}
-
-document.getElementById(
-"historyList"
-).innerHTML += `
-
-<div class="history-item">
-
-<h3>${currentOrder}</h3>
-
-<p>Price: ৳ ${currentPrice}</p>
-
-<p>TRX ID: ${trx}</p>
+</button>
 
 </div>
 
 `;
 
-alert("Order Confirmed 🔥");
-
-closePayment();
+});
 
 }
 
-/* HISTORY */
+function addOrder(productName){
 
-function openHistory(){
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-document.getElementById(
-"historyModal"
-).style.display="block";
+orders.push(productName);
+
+localStorage.setItem("orders", JSON.stringify(orders));
+
+loadOrders();
+
+alert(productName + ' Ordered Successfully');
+
+}
+
+function loadOrders(){
+
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+let historyContent = document.getElementById('historyContent');
+
+if(orders.length === 0){
+
+historyContent.innerHTML = 'এখনো পর্যন্ত কোনো অর্ডার করা হয়নি';
+
+}else{
+
+historyContent.innerHTML = '';
+
+orders.forEach(order=>{
+
+historyContent.innerHTML += `
+
+<div style="
+background:#000;
+padding:15px;
+margin-top:15px;
+border-radius:15px;
+font-size:22px;
+">
+
+✅ ${order}
+
+</div>
+
+`;
+
+});
 
 }
 
-function closeHistory(){
-
-document.getElementById(
-"historyModal"
-).style.display="none";
-
 }
+
+loadOrders();
 
 </script>
 
