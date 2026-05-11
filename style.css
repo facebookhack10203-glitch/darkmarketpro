@@ -1,402 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dark Market</title>
-
-<style>
-
 body{
 margin:0;
 padding:0;
 background:#000;
 font-family:Arial;
 color:white;
-padding-bottom:120px;
+padding-bottom:100px;
 }
 
-/* TOP BAR */
-
-.topbar{
-display:flex;
-align-items:center;
-padding:15px;
-background:#111;
-position:sticky;
-top:0;
-z-index:999;
-}
-
-.menu-btn{
-font-size:38px;
-cursor:pointer;
-margin-right:15px;
-}
-
-.logo{
-font-size:28px;
-font-weight:bold;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-position:fixed;
-top:0;
-left:-250px;
-width:220px;
-height:100%;
-background:#111;
-transition:0.4s;
-padding-top:70px;
-z-index:1000;
-}
-
-.sidebar a{
-display:block;
-color:white;
-text-decoration:none;
-padding:18px;
-font-size:22px;
-border-bottom:1px solid #222;
-}
-
-.sidebar a:hover{
-background:#1d1d1d;
-}
-
-/* CONTENT */
-
-.container{
+.header{
 padding:20px;
-}
-
-.title{
-font-size:50px;
-font-weight:bold;
-margin-top:20px;
-}
-
-.success{
-font-size:24px;
-color:#00ff73;
-margin-top:10px;
-}
-
-/* CARD */
-
-.card{
-background:#111;
-border-radius:30px;
-padding:25px;
-margin-top:30px;
-}
-
-.card h2{
-font-size:42px;
-margin-bottom:20px;
-}
-
-/* PRODUCT */
-
-.product-box{
-background:#1a1a1a;
-padding:20px;
-border-radius:20px;
-margin-top:20px;
 text-align:center;
-}
-
-.product-box img{
-width:100%;
-border-radius:15px;
-margin-bottom:15px;
-}
-
-.product-box h3{
-font-size:32px;
-}
-
-.product-box p{
-font-size:26px;
-color:#00ff73;
-}
-
-.product-box button,
-.money-btn{
-background:#0d6efd;
-border:none;
-padding:15px 40px;
-color:white;
-font-size:22px;
-border-radius:15px;
-cursor:pointer;
-margin-top:10px;
-}
-
-/* INPUT */
-
-.card input{
-width:92%;
-padding:18px;
-background:#1a1a1a;
-border:none;
-border-radius:15px;
-color:white;
-font-size:22px;
-margin-top:15px;
-}
-
-/* HISTORY */
-
-.history-box{
-background:#1a1a1a;
-padding:18px;
-border-radius:15px;
-margin-top:15px;
-font-size:22px;
-}
-
-/* FLOATING MENU */
-
-.bottom-menu{
-position:fixed;
-bottom:18px;
-left:50%;
-transform:translateX(-50%);
-width:92%;
+font-size:35px;
+font-weight:bold;
+color:#00ff99;
 background:#111;
-border-radius:35px;
-padding:15px 5px;
+box-shadow:0 0 15px #00ff99;
+}
+
+.search-box{
+padding:15px;
+}
+
+.search-box input{
+width:100%;
+padding:15px;
+border:none;
+border-radius:15px;
+background:#111;
+color:white;
+font-size:18px;
+outline:none;
+box-sizing:border-box;
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#111;
 display:flex;
 justify-content:space-around;
-align-items:center;
-box-shadow:0 0 25px rgba(255,255,255,0.2);
-z-index:999;
+padding:12px 0;
+border-top:1px solid #333;
 }
 
-.bottom-menu a{
+.bottom-nav button{
+background:none;
+border:none;
 color:white;
-text-decoration:none;
-font-size:16px;
+font-size:18px;
 font-weight:bold;
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:5px;
 }
 
-.bottom-menu span{
-font-size:28px;
+.admin-btn{
+position:fixed;
+top:15px;
+right:15px;
+background:#00aa66;
+padding:10px 18px;
+border-radius:12px;
+text-decoration:none;
+color:white;
+font-weight:bold;
 }
 
-</style>
-</head>
-
-<body>
-
-<!-- TOP -->
-
-<div class="topbar">
-
-<div class="menu-btn"
-onclick="openMenu()">
-
-☰
-
-</div>
-
-<div class="logo">
-Dark Market
-</div>
-
-</div>
-
-<!-- SIDEBAR -->
-
-<div class="sidebar" id="sidebar">
-
-<a href="#">🏠 Home</a>
-
-<a href="#products">🛒 Products</a>
-
-<a href="#social">📦 Social</a>
-
-<a href="#money">💰 Add Money</a>
-
-<a href="#history">📜 History</a>
-
-</div>
-
-<!-- MAIN -->
-
-<div class="container">
-
-<div class="title">
-Welcome To Dark Market
-</div>
-
-<div class="success">
-Login Successful ✅
-</div>
-
-<!-- PRODUCTS -->
-
-<div class="card" id="products">
-
-<h2>🛒 Products</h2>
-
-<div class="product-box">
-
-<img src="https://picsum.photos/400/250">
-
-<h3>Gaming Headphone</h3>
-
-<p>৳ 1200</p>
-
-<button>Add To Cart</button>
-
-</div>
-
-<div class="product-box">
-
-<img src="https://picsum.photos/401/250">
-
-<h3>Smart Watch</h3>
-
-<p>৳ 2500</p>
-
-<button>Add To Cart</button>
-
-</div>
-
-</div>
-
-<!-- SOCIAL -->
-
-<div class="card" id="social">
-
-<h2>📦 Social Products</h2>
-
-<div class="product-box">
-
-<h3>Facebook Page Boost</h3>
-
-<p>৳ 500</p>
-
-<button>Buy Now</button>
-
-</div>
-
-<div class="product-box">
-
-<h3>TikTok Followers</h3>
-
-<p>৳ 300</p>
-
-<button>Buy Now</button>
-
-</div>
-
-</div>
-
-<!-- MONEY -->
-
-<div class="card" id="money">
-
-<h2>💰 Add Money</h2>
-
-<p style="font-size:22px;">
-Bkash/Nagad Number:
-</p>
-
-<h3 style="color:#00ff73;font-size:30px;">
-01XXXXXXXXX
-</h3>
-
-<input type="number"
-placeholder="Enter Amount">
-
-<button class="money-btn">
-Add Money
-</button>
-
-</div>
-
-<!-- HISTORY -->
-
-<div class="card" id="history">
-
-<h2>📜 Order History</h2>
-
-<div class="history-box">
-✔ Gaming Headphone Ordered
-</div>
-
-<div class="history-box">
-✔ Facebook Boost Ordered
-</div>
-
-</div>
-
-</div>
-
-<!-- FLOATING MENU -->
-
-<div class="bottom-menu">
-
-<a href="#">
-<span>🏠</span>
-Home
-</a>
-
-<a href="#products">
-<span>🛒</span>
-Products
-</a>
-
-<a href="#social">
-<span>📦</span>
-Social
-</a>
-
-<a href="#money">
-<span>💰</span>
-Money
-</a>
-
-<a href="#history">
-<span>📜</span>
-History
-</a>
-
-</div>
-
-<script>
-
-let sidebar =
-document.getElementById("sidebar");
-
-let open = false;
-
-function openMenu(){
-
-if(open === false){
-
-sidebar.style.left = "0";
-open = true;
-
-}else{
-
-sidebar.style.left = "-250px";
-open = false;
-
+.product-card{
+background:#111;
+padding:15px;
+border-radius:20px;
+margin-top:15px;
 }
 
+.product-card img{
+width:100%;
+border-radius:15px;
 }
 
-</script>
+.product-card h3{
+font-size:24px;
+margin-top:10px;
+}
 
-</body>
-</html>
+.product-card p{
+font-size:20px;
+color:#00ff99;
+font-weight:bold;
+}
+
+.buy-btn{
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+background:#00aa66;
+color:white;
+font-size:18px;
+font-weight:bold;
+margin-top:10px;
+}
