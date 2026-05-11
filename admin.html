@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Panel</title>
 
 <style>
 
 body{
-background:#000;
-color:white;
-font-family:Arial;
+margin:0;
 padding:20px;
+background:black;
+font-family:Arial;
+color:white;
+padding-bottom:100px;
+}
+
+h1{
+text-align:center;
+color:#00ff99;
+font-size:40px;
 }
 
 .box{
@@ -19,88 +29,289 @@ border-radius:20px;
 margin-top:20px;
 }
 
-h1{
-color:#00ff88;
+input,select{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:15px;
+background:#222;
+color:white;
+font-size:18px;
+box-sizing:border-box;
+outline:none;
 }
 
 button{
 width:100%;
 padding:15px;
+margin-top:20px;
 border:none;
 border-radius:15px;
-background:#0066ff;
+background:#00aa66;
 color:white;
-font-size:18px;
+font-size:20px;
+font-weight:bold;
+}
+
+.category-card,
+.product-card{
+background:#111;
+padding:15px;
+border-radius:20px;
 margin-top:15px;
 }
 
-</style>
+img{
+width:100%;
+border-radius:15px;
+margin-top:10px;
+}
 
+.edit-btn{
+background:#0066ff;
+margin-top:10px;
+}
+
+.delete-btn{
+background:red;
+margin-top:10px;
+}
+
+</style>
 </head>
 
 <body>
 
-<h1>DarkMarketPro Admin</h1>
+<h1>🛠 Admin Panel</h1>
+
+<!-- CATEGORY -->
 
 <div class="box">
 
-<h2>Total Orders</h2>
+<h2>Add Category</h2>
 
-<p id="orders">0</p>
+<input type="text"
+id="categoryName"
+placeholder="Category Name">
 
-<button onclick="loadOrders()">
-Refresh Orders
+<button onclick="addCategory()">
+Add Category
 </button>
 
 </div>
 
+<!-- PRODUCT -->
+
 <div class="box">
 
-<h2>All Orders</h2>
+<h2>Add Product</h2>
 
-<div id="list"></div>
+<input type="text"
+id="productName"
+placeholder="Product Name">
+
+<input type="text"
+id="productPrice"
+placeholder="Product Price">
+
+<input type="text"
+id="productImage"
+placeholder="Image URL">
+
+<select id="productCategory">
+
+</select>
+
+<button onclick="addProduct()">
+Add Product
+</button>
+
+</div>
+
+<!-- CATEGORY LIST -->
+
+<div class="box">
+
+<h2>All Categories</h2>
+
+<div id="categoryList"></div>
+
+</div>
+
+<!-- PRODUCT LIST -->
+
+<div class="box">
+
+<h2>All Products</h2>
+
+<div id="productList"></div>
 
 </div>
 
 <script>
 
-function loadOrders(){
+let categories =
+JSON.parse(localStorage.getItem("categories")) || [];
 
-let data =
-localStorage.getItem("orders");
+let products =
+JSON.parse(localStorage.getItem("products")) || [];
 
-if(!data){
+function saveData(){
 
-document.getElementById("list")
-.innerHTML="No Orders";
+localStorage.setItem(
+"categories",
+JSON.stringify(categories)
+);
 
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
+
+}
+
+function loadCategories(){
+
+let categoryList =
+document.getElementById("categoryList");
+
+let productCategory =
+document.getElementById("productCategory");
+
+categoryList.innerHTML = "";
+
+productCategory.innerHTML = "";
+
+categories.forEach((category,index)=>{
+
+categoryList.innerHTML += `
+
+<div class="category-card">
+
+<h3>${category}</h3>
+
+<button class="edit-btn"
+onclick="editCategory(${index})">
+
+Edit
+
+</button>
+
+<button class="delete-btn"
+onclick="deleteCategory(${index})">
+
+Delete
+
+</button>
+
+</div>
+
+`;
+
+productCategory.innerHTML += `
+
+<option value="${category}">
+${category}
+</option>
+
+`;
+
+});
+
+}
+
+function addCategory(){
+
+let categoryName =
+document.getElementById("categoryName").value;
+
+if(categoryName === ""){
+
+alert("Enter Category Name");
 return;
 
 }
 
-let orders = JSON.parse(data);
+categories.push(categoryName);
 
-document.getElementById("orders")
-.innerText = orders.length;
+saveData();
 
-let html="";
+loadCategories();
 
-orders.forEach(order=>{
+document.getElementById("categoryName").value = "";
 
-html += `
+}
 
-<div style="
-background:#222;
-padding:15px;
-border-radius:15px;
-margin-top:15px;
-">
+function deleteCategory(index){
 
-<h3>${order.product}</h3>
+categories.splice(index,1);
 
-<p>Price: ৳ ${order.price}</p>
+saveData();
 
-<p>TRX ID: ${order.trx}</p>
+loadCategories();
+
+}
+
+function editCategory(index){
+
+let newName =
+prompt(
+"Edit Category",
+categories[index]
+);
+
+if(newName){
+
+categories[index] = newName;
+
+saveData();
+
+loadCategories();
+
+}
+
+}
+
+function loadProducts(){
+
+let productList =
+document.getElementById("productList");
+
+productList.innerHTML = "";
+
+products.forEach((product,index)=>{
+
+productList.innerHTML += `
+
+<div class="product-card">
+
+<h3>${product.name}</h3>
+
+<p>
+৳ ${product.price}
+</p>
+
+<p>
+Category:
+${product.category}
+</p>
+
+<img src="${product.image}">
+
+<button class="edit-btn"
+onclick="editProduct(${index})">
+
+Edit
+
+</button>
+
+<button class="delete-btn"
+onclick="deleteProduct(${index})">
+
+Delete
+
+</button>
 
 </div>
 
@@ -108,12 +319,82 @@ margin-top:15px;
 
 });
 
-document.getElementById("list")
-.innerHTML = html;
+}
+
+function addProduct(){
+
+let name =
+document.getElementById("productName").value;
+
+let price =
+document.getElementById("productPrice").value;
+
+let image =
+document.getElementById("productImage").value;
+
+let category =
+document.getElementById("productCategory").value;
+
+if(
+name === "" ||
+price === "" ||
+image === ""
+){
+
+alert("Fill All Fields");
+return;
 
 }
 
-loadOrders();
+products.push({
+name,
+price,
+image,
+category
+});
+
+saveData();
+
+loadProducts();
+
+document.getElementById("productName").value = "";
+document.getElementById("productPrice").value = "";
+document.getElementById("productImage").value = "";
+
+}
+
+function deleteProduct(index){
+
+products.splice(index,1);
+
+saveData();
+
+loadProducts();
+
+}
+
+function editProduct(index){
+
+let newName =
+prompt(
+"Edit Product Name",
+products[index].name
+);
+
+if(newName){
+
+products[index].name = newName;
+
+saveData();
+
+loadProducts();
+
+}
+
+}
+
+loadCategories();
+loadProducts();
 
 </script>
 
