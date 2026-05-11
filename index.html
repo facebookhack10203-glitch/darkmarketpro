@@ -12,19 +12,20 @@
 
 <body>
 
-<a href="admin.html" class="admin-btn">
-Admin
-</a>
-
 <div class="header">
 DarkMarketPro
 </div>
 
 <div class="search-box">
-<input type="text" placeholder="🔎 Search Products">
+
+<input type="text"
+placeholder="🔎 Search Products">
+
 </div>
 
-<div id="categoriesContainer"></div>
+<div id="categoriesContainer">
+
+</div>
 
 <div class="bottom-nav">
 
@@ -40,9 +41,24 @@ DarkMarketPro
 🛠 Support
 </button>
 
+<button onclick="openAdmin()">
+⚙️ Admin
+</button>
+
 </div>
 
 <script src="script.js"></script>
+
+<script>
+
+function openAdmin(){
+
+window.location.href =
+"admin.html";
+
+}
+
+</script>
 
 </body>
 </html>
