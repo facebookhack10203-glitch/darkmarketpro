@@ -246,5 +246,37 @@ border-radius:15px;
 
 }
 
+/* INSTALL APP */
+
+let deferredPrompt;
+
+window.addEventListener(
+'beforeinstallprompt',
+(e)=>{
+
+e.preventDefault();
+
+deferredPrompt = e;
+
+document.getElementById(
+'installBtn'
+).style.display = 'inline-block';
+
+});
+
+document.getElementById(
+'installBtn'
+).addEventListener(
+'click',
+async ()=>{
+
+if(deferredPrompt){
+
+deferredPrompt.prompt();
+
+}
+
+});
+
 loadProducts();
 loadOrders();
