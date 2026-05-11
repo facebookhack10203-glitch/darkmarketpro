@@ -150,6 +150,16 @@ Add Product
 
 </div>
 
+<!-- ORDER LIST -->
+
+<div class="box">
+
+<h2>Customer Orders</h2>
+
+<div id="ordersList"></div>
+
+</div>
+
 <script>
 
 let categories =
@@ -400,8 +410,121 @@ loadProducts();
 
 }
 
+function loadOrdersAdmin(){
+
+let orders =
+JSON.parse(localStorage.getItem("adminOrders")) || [];
+
+let ordersList =
+document.getElementById("ordersList");
+
+ordersList.innerHTML = "";
+
+if(orders.length === 0){
+
+ordersList.innerHTML = `
+<div class="product-card">
+No Orders Yet
+</div>
+`;
+
+return;
+
+}
+
+orders.forEach((order,index)=>{
+
+ordersList.innerHTML += `
+
+<div class="product-card">
+
+<h3>${order.product}</h3>
+
+<p>
+Customer: ${order.name}
+</p>
+
+<p>
+District: ${order.district}
+</p>
+
+<p>
+Village: ${order.village}
+</p>
+
+<p>
+Phone: ${order.phone}
+</p>
+
+<p>
+Method: ${order.paymentMethod}
+</p>
+
+<p>
+TRX ID: ${order.trxid}
+</p>
+
+<p>
+Status: ${order.status}
+</p>
+
+<button class="edit-btn"
+onclick="approveOrder(${index})">
+
+Approve
+
+</button>
+
+<button class="delete-btn"
+onclick="deleteOrder(${index})">
+
+Delete
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+function approveOrder(index){
+
+let orders =
+JSON.parse(localStorage.getItem("adminOrders")) || [];
+
+orders[index].status = "Approved";
+
+localStorage.setItem(
+"adminOrders",
+JSON.stringify(orders)
+);
+
+loadOrdersAdmin();
+
+}
+
+function deleteOrder(index){
+
+let orders =
+JSON.parse(localStorage.getItem("adminOrders")) || [];
+
+orders.splice(index,1);
+
+localStorage.setItem(
+"adminOrders",
+JSON.stringify(orders)
+);
+
+loadOrdersAdmin();
+
+}
+
 loadCategories();
 loadProducts();
+loadOrdersAdmin();
 
 </script>
 
