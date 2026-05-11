@@ -3,111 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>DarkMarketPro</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
 
 body{
+margin:0;
+padding:0;
 background:black;
+font-family:Arial;
 color:white;
-padding-bottom:100px;
+padding-bottom:90px;
 }
 
-header{
+.header{
 text-align:center;
-padding:30px 20px;
-border-bottom:3px solid #00ff99;
+padding:25px;
+font-size:42px;
+font-weight:bold;
+color:#00ff99;
+border-bottom:2px solid #00ff99;
 box-shadow:0 0 20px #00ff99;
 }
 
-header h1{
-font-size:60px;
-color:#00ff99;
+.page{
+display:none;
+padding:20px;
 }
 
-.logo{
-width:220px;
-height:220px;
-object-fit:cover;
+.page.active{
 display:block;
-margin:30px auto;
-border-radius:20px;
 }
 
 .search-box{
-width:90%;
-margin:20px auto;
-background:#111;
-padding:20px;
-border-radius:25px;
+margin-top:20px;
 }
 
 .search-box input{
 width:100%;
-background:none;
+padding:18px;
 border:none;
-outline:none;
+border-radius:20px;
+background:#111;
 color:white;
-font-size:28px;
+font-size:22px;
+outline:none;
 }
 
 .section-title{
-font-size:55px;
-font-weight:bold;
-margin:40px 30px;
+font-size:35px;
+margin-top:40px;
+margin-bottom:20px;
 }
 
 .products{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
+display:grid;
+grid-template-columns:1fr;
 gap:20px;
-padding:20px;
 }
 
-.card{
+.product{
 background:#111;
-width:320px;
-padding:20px;
-border-radius:25px;
-box-shadow:0 0 20px #00ff99;
-text-align:center;
-}
-
-.card img{
-width:100%;
-height:260px;
-object-fit:cover;
+padding:15px;
 border-radius:20px;
 }
 
-.card h2{
-margin-top:20px;
-font-size:40px;
+.product img{
+width:100%;
+border-radius:15px;
 }
 
-.card p{
-font-size:38px;
-margin-top:15px;
+.product h3{
+font-size:28px;
+}
+
+.product p{
+font-size:22px;
 color:#00ff99;
-font-weight:bold;
 }
 
 .buy-btn{
-margin-top:20px;
-padding:18px 35px;
-border:none;
-border-radius:18px;
-background:#0066ff;
+display:block;
+text-align:center;
+padding:15px;
+background:#00aa66;
 color:white;
-font-size:30px;
+text-decoration:none;
+border-radius:15px;
+font-size:22px;
 font-weight:bold;
+margin-top:10px;
+}
+
+.history-box{
+background:#111;
+padding:30px;
+border-radius:20px;
+font-size:28px;
+text-align:center;
+margin-top:50px;
+}
+
+.support-box{
+margin-top:60px;
+text-align:center;
+}
+
+.support-btn{
+display:inline-block;
+padding:20px 30px;
+background:#0088cc;
+color:white;
+font-size:28px;
+font-weight:bold;
+text-decoration:none;
+border-radius:20px;
 }
 
 .bottom-nav{
@@ -118,50 +129,15 @@ width:100%;
 background:#111;
 display:flex;
 justify-content:space-around;
-padding:18px 0;
-border-top:2px solid #222;
+padding:12px 0;
+border-top:1px solid #333;
 }
 
 .nav-btn{
 background:none;
 border:none;
 color:white;
-font-size:20px;
-font-weight:bold;
-}
-
-.section{
-display:none;
-}
-
-.active{
-display:block;
-}
-
-.history-box{
-background:#111;
-margin:40px 20px;
-padding:30px;
-border-radius:25px;
-text-align:center;
-font-size:30px;
-box-shadow:0 0 20px #00ff99;
-}
-
-.support-box{
-padding:40px;
-text-align:center;
-}
-
-.support-btn{
-display:inline-block;
-padding:20px 35px;
-background:#0088cc;
-color:white;
-text-decoration:none;
-border-radius:20px;
-font-size:28px;
-font-weight:bold;
+font-size:24px;
 }
 
 </style>
@@ -169,13 +145,13 @@ font-weight:bold;
 
 <body>
 
-<header>
-<h1>DarkMarketPro</h1>
-</header>
+<div class="header">
+DarkMarketPro
+</div>
 
-<div id="homePage" class="section active">
+<!-- HOME PAGE -->
 
-<img src="logo.png" class="logo">
+<div id="homePage" class="page active">
 
 <div class="search-box">
 <input type="text" placeholder="🔎 Search Products">
@@ -183,44 +159,92 @@ font-weight:bold;
 
 <h2 class="section-title">🔥 Trending Products</h2>
 
-<div class="products" id="productsContainer">
+<div class="products">
 
+<div class="product">
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1000&auto=format&fit=crop">
+
+<h3>iPhone 15 Pro</h3>
+
+<p>$999</p>
+
+<a class="buy-btn"
+onclick="addOrder('iPhone 15 Pro')">
+Buy Now
+</a>
+</div>
+
+<div class="product">
+<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1000&auto=format&fit=crop">
+
+<h3>Nike Shoes</h3>
+
+<p>$120</p>
+
+<a class="buy-btn"
+onclick="addOrder('Nike Shoes')">
+Buy Now
+</a>
+</div>
+
+</div>
+</div>
+
+<!-- HISTORY PAGE -->
+
+<div id="historyPage" class="page">
+
+<h2 class="section-title">📜 Order History</h2>
+
+<div id="historyContent" class="history-box">
+No Order History
 </div>
 
 </div>
 
-<div id="historyPage" class="section">
+<!-- SUPPORT PAGE -->
 
-<div class="history-box">
-📜 এখনো পর্যন্ত কোনো অর্ডার করা হয়নি
-</div>
+<div id="supportPage" class="page">
 
-</div>
-
-<div id="supportPage" class="section">
+<h2 class="section-title">🛠 Support</h2>
 
 <div class="support-box">
 
-<a class="support-btn" href="https://t.me/Yangchun11" target="_blank">
+<a class="support-btn"
+href="https://t.me/Yangchun11"
+target="_blank">
+
 📩 Contact Telegram Support
+
 </a>
 
 </div>
 
 </div>
 
+<!-- BOTTOM NAV -->
+
 <div class="bottom-nav">
 
-<button class="nav-btn" onclick="showPage('homePage')">
-🏠<br>Home
+<button class="nav-btn"
+onclick="showPage('homePage')">
+
+🏠 Home
+
 </button>
 
-<button class="nav-btn" onclick="showPage('historyPage')">
-📜<br>History
+<button class="nav-btn"
+onclick="showPage('historyPage')">
+
+📜 History
+
 </button>
 
-<button class="nav-btn" onclick="showPage('supportPage')">
-🛠<br>Support
+<button class="nav-btn"
+onclick="showPage('supportPage')">
+
+🛠 Support
+
 </button>
 
 </div>
@@ -229,39 +253,63 @@ font-weight:bold;
 
 function showPage(pageId){
 
-document.querySelectorAll('.section').forEach(section=>{
-section.classList.remove('active');
+document.querySelectorAll('.page').forEach(page=>{
+page.classList.remove('active');
 });
 
 document.getElementById(pageId).classList.add('active');
 
 }
 
-const products = JSON.parse(localStorage.getItem("products")) || [];
+function addOrder(productName){
 
-const productsContainer = document.getElementById("productsContainer");
+let orders = JSON.parse(localStorage.getItem('orders')) || [];
 
-products.forEach(product=>{
+orders.push(productName);
 
-productsContainer.innerHTML += `
+localStorage.setItem('orders', JSON.stringify(orders));
 
-<div class="card">
+loadOrders();
 
-<img src="${product.image}">
+alert(productName + ' Ordered Successfully');
 
-<h2>${product.name}</h2>
+}
 
-<p>৳ ${product.price}</p>
+function loadOrders(){
 
-<button class="buy-btn">
-Buy Now
-</button>
+let orders = JSON.parse(localStorage.getItem('orders')) || [];
 
+let historyContent = document.getElementById('historyContent');
+
+if(orders.length === 0){
+
+historyContent.innerHTML = 'No Order History';
+
+}else{
+
+historyContent.innerHTML = '';
+
+orders.forEach(order=>{
+
+historyContent.innerHTML += `
+<div style="
+background:#000;
+padding:15px;
+margin-top:15px;
+border-radius:15px;
+font-size:24px;
+">
+✅ ${order}
 </div>
-
 `;
 
 });
+
+}
+
+}
+
+loadOrders();
 
 </script>
 
