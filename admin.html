@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Admin Panel</title>
 
 <style>
@@ -10,7 +11,7 @@
 body{
 margin:0;
 padding:20px;
-background:black;
+background:#000;
 font-family:Arial;
 color:white;
 padding-bottom:100px;
@@ -251,6 +252,8 @@ saveData();
 
 loadCategories();
 
+loadProducts();
+
 }
 
 function editCategory(index){
@@ -268,6 +271,8 @@ categories[index] = newName;
 saveData();
 
 loadCategories();
+
+loadProducts();
 
 }
 
@@ -360,6 +365,8 @@ loadProducts();
 document.getElementById("productName").value = "";
 document.getElementById("productPrice").value = "";
 document.getElementById("productImage").value = "";
+
+alert("Product Added");
 
 }
 
