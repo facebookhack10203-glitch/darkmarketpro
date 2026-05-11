@@ -8,6 +8,56 @@
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+
+.page{
+display:none;
+}
+
+.page.active{
+display:block;
+}
+
+.order-box,
+.history-box{
+background:#111;
+padding:25px;
+margin:20px;
+border-radius:20px;
+font-size:22px;
+}
+
+.support-box{
+padding:30px;
+text-align:center;
+}
+
+.support-btn{
+display:inline-block;
+padding:18px 25px;
+background:#0088cc;
+color:white;
+text-decoration:none;
+border-radius:15px;
+font-size:22px;
+font-weight:bold;
+}
+
+.order-box input,
+.order-box select{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:15px;
+background:#222;
+color:white;
+font-size:18px;
+box-sizing:border-box;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -59,6 +109,87 @@ target="_blank">
 📩 Telegram Support
 
 </a>
+
+</div>
+
+</div>
+
+<!-- ORDER PAGE -->
+
+<div id="orderPage" class="page">
+
+<div class="order-box">
+
+<h2>Order Form</h2>
+
+<input type="text"
+id="fullName"
+placeholder="Full Name">
+
+<input type="text"
+id="district"
+placeholder="District">
+
+<input type="text"
+id="village"
+placeholder="Village">
+
+<input type="text"
+id="phone"
+placeholder="Phone Number">
+
+<button class="buy-btn"
+onclick="continuePayment()">
+
+Continue Payment
+
+</button>
+
+</div>
+
+</div>
+
+<!-- PAYMENT PAGE -->
+
+<div id="paymentPage" class="page">
+
+<div class="order-box">
+
+<h2>Payment</h2>
+
+<p>
+শুধুমাত্র Send Money গ্রহণ করা হয়
+</p>
+
+<h2 id="bkashNumber">
+01944875610
+</h2>
+
+<button class="buy-btn"
+onclick="copyNumber()">
+
+Copy Number
+
+</button>
+
+<input type="text"
+id="trxid"
+placeholder="Enter Transaction ID">
+
+<select id="paymentMethod">
+
+<option value="bKash">
+bKash
+</option>
+
+</select>
+
+<button class="buy-btn"
+onclick="submitOrder()">
+
+Submit Order
+
+</button>
 
 </div>
 
