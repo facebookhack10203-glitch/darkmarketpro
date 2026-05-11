@@ -6,27 +6,25 @@
 <title>DarkMarketPro</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial;
-}
 
 body{
+margin:0;
+padding:0;
 background:#000;
+font-family:Arial;
 color:white;
-padding-bottom:100px;
 }
 
-header{
-padding:20px;
+.topbar{
+padding:15px;
 text-align:center;
-font-size:40px;
-font-weight:bold;
-color:#00ff88;
-border-bottom:2px solid #00ff88;
-box-shadow:0 0 20px #00ff88;
+box-shadow:0 0 15px #00ff88;
+}
+
+.logo{
+width:180px;
+display:block;
+margin:auto;
 }
 
 .search-box{
@@ -37,36 +35,42 @@ padding:20px;
 width:100%;
 padding:18px;
 border:none;
-border-radius:20px;
+border-radius:18px;
 background:#111;
 color:white;
-font-size:20px;
+font-size:18px;
+outline:none;
+box-sizing:border-box;
+}
+
+.category{
+padding:15px;
 }
 
 .category-title{
-font-size:40px;
+font-size:34px;
 font-weight:bold;
-padding:20px;
-margin-top:10px;
+margin-bottom:20px;
 }
 
 .products{
-display:grid;
-grid-template-columns:1fr 1fr;
+display:flex;
 gap:15px;
-padding:15px;
+overflow-x:auto;
 }
 
 .card{
+min-width:230px;
 background:#0d0d0d;
-border-radius:25px;
 padding:15px;
-box-shadow:0 0 10px rgba(0,255,136,0.2);
+border-radius:25px;
+text-align:center;
+box-shadow:0 0 15px rgba(0,255,136,0.2);
 }
 
 .card img{
 width:100%;
-height:220px;
+height:240px;
 object-fit:cover;
 border-radius:20px;
 }
@@ -77,21 +81,21 @@ margin-top:15px;
 }
 
 .price{
-font-size:24px;
-color:#00ff88;
+font-size:34px;
 font-weight:bold;
+color:#00ff88;
 margin-top:10px;
 }
 
 .buy-btn{
-width:100%;
-padding:14px;
-margin-top:15px;
-border:none;
-border-radius:15px;
+display:block;
+margin-top:20px;
 background:#0066ff;
+padding:15px;
+border-radius:18px;
+text-decoration:none;
 color:white;
-font-size:20px;
+font-size:28px;
 font-weight:bold;
 }
 
@@ -100,80 +104,105 @@ position:fixed;
 bottom:0;
 left:0;
 width:100%;
-background:#111;
+background:#0b0b0b;
 display:flex;
 justify-content:space-around;
 padding:15px 0;
 border-top:1px solid #222;
 }
 
-.bottom-nav div{
-text-align:center;
+.bottom-nav a{
+color:white;
+text-decoration:none;
 font-size:18px;
+text-align:center;
 font-weight:bold;
 }
+
+.space{
+height:120px;
+}
+
 </style>
 </head>
+
 <body>
 
-<header>
-DarkMarketPro
-</header>
+<div class="topbar">
+<img src="logo.png" class="logo">
+</div>
 
 <div class="search-box">
-<input type="text" id="search" placeholder="🔎 Search Products">
+<input type="text" placeholder="🔎 Search Products">
 </div>
 
-<div id="allCategories"></div>
+<div class="category">
+
+<div class="category-title">
+🔥 Trending Products
+</div>
+
+<div class="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
+<h2>iPhone 15 Pro</h2>
+<div class="price">৳ 85000</div>
+<a class="buy-btn" href="#">Buy Now</a>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853">
+<h2>Gaming Laptop</h2>
+<div class="price">৳ 65000</div>
+<a class="buy-btn" href="#">Buy Now</a>
+</div>
+
+</div>
+</div>
+
+<div class="category">
+
+<div class="category-title">
+🎮 Gaming Products
+</div>
+
+<div class="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3">
+<h2>PS5 Controller</h2>
+<div class="price">৳ 5500</div>
+<a class="buy-btn" href="#">Buy Now</a>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575">
+<h2>Gaming Mouse</h2>
+<div class="price">৳ 2500</div>
+<a class="buy-btn" href="#">Buy Now</a>
+</div>
+
+</div>
+</div>
+
+<div class="space"></div>
 
 <div class="bottom-nav">
-<div>🏠<br>Home</div>
-<div>📜<br>History</div>
-<div>🛠️<br>Support</div>
+
+<a href="#">
+🏠<br>Home
+</a>
+
+<a href="#">
+📜<br>History
+</a>
+
+<a href="#">
+🛠️<br>Support
+</a>
+
 </div>
-
-<script>
-let products = JSON.parse(localStorage.getItem("products")) || [];
-
-let container = document.getElementById("allCategories");
-
-function showProducts(){
-container.innerHTML = "";
-
-let grouped = {};
-
-products.forEach(item=>{
-if(!grouped[item.category]){
-grouped[item.category] = [];
-}
-
-grouped[item.category].push(item);
-});
-
-for(let category in grouped){
-
-container.innerHTML += `
-<div class="category-title">🔥 ${category}</div>
-<div class="products" id="${category}"></div>
-`;
-
-let box = document.getElementById(category);
-
- grouped[category].forEach(product=>{
-box.innerHTML += `
-<div class="card">
-<img src="${product.image}">
-<h2>${product.name}</h2>
-<div class="price">৳ ${product.price}</div>
-<button class="buy-btn">Buy Now</button>
-</div>
-`;
-});
-}
-}
-
-showProducts();
-</script>
 
 </body>
 </html>
