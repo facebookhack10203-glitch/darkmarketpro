@@ -10,93 +10,81 @@
 body{
 margin:0;
 padding:0;
-background:#000;
+background:black;
 font-family:Arial;
 color:white;
+padding-bottom:90px;
 }
 
-.topbar{
-padding:15px;
+header{
 text-align:center;
-box-shadow:0 0 15px #00ff88;
+padding:20px;
+border-bottom:2px solid #00ff99;
+box-shadow:0 0 20px #00ff99;
 }
 
 .logo{
-width:180px;
+width:120px;
+height:120px;
+object-fit:contain;
 display:block;
 margin:auto;
+border-radius:20px;
+}
+
+.title{
+font-size:50px;
+font-weight:bold;
+color:#00ff99;
+margin-top:10px;
 }
 
 .search-box{
-padding:20px;
+width:85%;
+margin:30px auto;
+background:#111;
+padding:18px;
+border-radius:20px;
+box-shadow:0 0 20px #00ff99;
 }
 
 .search-box input{
 width:100%;
-padding:18px;
+background:none;
 border:none;
-border-radius:18px;
-background:#111;
-color:white;
-font-size:18px;
 outline:none;
-box-sizing:border-box;
-}
-
-.category{
-padding:15px;
-}
-
-.category-title{
-font-size:34px;
-font-weight:bold;
-margin-bottom:20px;
-}
-
-.products{
-display:flex;
-gap:15px;
-overflow-x:auto;
-}
-
-.card{
-min-width:230px;
-background:#0d0d0d;
-padding:15px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 0 15px rgba(0,255,136,0.2);
-}
-
-.card img{
-width:100%;
-height:240px;
-object-fit:cover;
-border-radius:20px;
-}
-
-.card h2{
-font-size:22px;
-margin-top:15px;
-}
-
-.price{
-font-size:34px;
-font-weight:bold;
-color:#00ff88;
-margin-top:10px;
-}
-
-.buy-btn{
-display:block;
-margin-top:20px;
-background:#0066ff;
-padding:15px;
-border-radius:18px;
-text-decoration:none;
 color:white;
-font-size:28px;
+font-size:24px;
+}
+
+.section-title{
+font-size:45px;
 font-weight:bold;
+margin:30px;
+}
+
+.category-box{
+width:90%;
+margin:auto;
+background:#111;
+padding:20px;
+border-radius:20px;
+margin-bottom:25px;
+box-shadow:0 0 15px #00ff99;
+}
+
+.category-name{
+font-size:35px;
+font-weight:bold;
+margin-bottom:15px;
+color:#00ff99;
+}
+
+.empty-text{
+font-size:24px;
+color:gray;
+text-align:center;
+padding:40px 0;
 }
 
 .bottom-nav{
@@ -104,23 +92,19 @@ position:fixed;
 bottom:0;
 left:0;
 width:100%;
-background:#0b0b0b;
+background:#111;
 display:flex;
 justify-content:space-around;
-padding:15px 0;
-border-top:1px solid #222;
+padding:14px 0;
+border-top:1px solid #333;
 }
 
-.bottom-nav a{
+.bottom-nav button{
+background:none;
+border:none;
 color:white;
-text-decoration:none;
-font-size:18px;
-text-align:center;
+font-size:20px;
 font-weight:bold;
-}
-
-.space{
-height:120px;
 }
 
 </style>
@@ -128,81 +112,91 @@ height:120px;
 
 <body>
 
-<div class="topbar">
+<header>
+
 <img src="logo.png" class="logo">
+
+<div class="title">
+DarkMarketPro
 </div>
+
+</header>
 
 <div class="search-box">
 <input type="text" placeholder="🔎 Search Products">
 </div>
 
-<div class="category">
-
-<div class="category-title">
+<div class="section-title">
 🔥 Trending Products
 </div>
 
-<div class="products">
+<div class="category-box">
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
-<h2>iPhone 15 Pro</h2>
-<div class="price">৳ 85000</div>
-<a class="buy-btn" href="#">Buy Now</a>
+<div class="category-name">
+📱 Mobile
 </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853">
-<h2>Gaming Laptop</h2>
-<div class="price">৳ 65000</div>
-<a class="buy-btn" href="#">Buy Now</a>
+<div class="empty-text">
+No Products Added
 </div>
 
 </div>
+
+<div class="category-box">
+
+<div class="category-name">
+💻 Laptop
 </div>
 
-<div class="category">
-
-<div class="category-title">
-🎮 Gaming Products
-</div>
-
-<div class="products">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3">
-<h2>PS5 Controller</h2>
-<div class="price">৳ 5500</div>
-<a class="buy-btn" href="#">Buy Now</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575">
-<h2>Gaming Mouse</h2>
-<div class="price">৳ 2500</div>
-<a class="buy-btn" href="#">Buy Now</a>
+<div class="empty-text">
+No Products Added
 </div>
 
 </div>
+
+<div class="category-box">
+
+<div class="category-name">
+🎮 Gaming
 </div>
 
-<div class="space"></div>
+<div class="empty-text">
+No Products Added
+</div>
+
+</div>
 
 <div class="bottom-nav">
 
-<a href="#">
+<button onclick="goHome()">
 🏠<br>Home
-</a>
+</button>
 
-<a href="#">
+<button onclick="showHistory()">
 📜<br>History
-</a>
+</button>
 
-<a href="#">
+<button onclick="openSupport()">
 🛠️<br>Support
-</a>
+</button>
 
 </div>
+
+<script>
+
+function goHome(){
+window.location.href="index.html";
+}
+
+function showHistory(){
+alert("No History Yet");
+}
+
+function openSupport(){
+window.location.href="https://t.me/yourusername";
+}
+
+</script>
 
 </body>
 </html>
