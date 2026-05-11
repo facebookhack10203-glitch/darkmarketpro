@@ -1,66 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>DarkMarket Admin</title>
+  <title>DarkMarket Admin</title>
 
-<style>
+  <style>
+    body{
+      background:#000;
+      color:white;
+      font-family:Arial;
+      padding:20px;
+    }
 
-body{
-background:#000;
-color:white;
-font-family:Arial;
-padding:20px;
-}
+    h1{
+      color:#00ff88;
+    }
 
-h1{
-color:#00ff88;
-margin-bottom:20px;
-}
+    .box{
+      background:#111;
+      padding:20px;
+      border-radius:15px;
+      margin-top:20px;
+    }
 
-.box{
-background:#111;
-padding:20px;
-border-radius:20px;
-margin-bottom:20px;
-}
+    input{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      background:#222;
+      border:none;
+      color:white;
+      border-radius:10px;
+    }
 
-input{
-width:100%;
-padding:15px;
-margin-top:10px;
-border:none;
-border-radius:12px;
-background:#222;
-color:white;
-font-size:16px;
-}
+    button{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      border:none;
+      border-radius:10px;
+      background:#0066ff;
+      color:white;
+      font-size:16px;
+    }
 
-button{
-width:100%;
-padding:15px;
-margin-top:15px;
-border:none;
-border-radius:15px;
-background:#0066ff;
-color:white;
-font-size:18px;
-font-weight:bold;
-}
+    .product{
+      background:#1a1a1a;
+      padding:15px;
+      border-radius:10px;
+      margin-top:15px;
+    }
 
-.product{
-background:#222;
-padding:15px;
-border-radius:15px;
-margin-top:15px;
-}
+    img{
+      width:100%;
+      border-radius:10px;
+      margin-top:10px;
+    }
 
-img{
-width:100%;
-border-radius:15px;
-margin-top:10px;
-}
+    .edit{
+      background:orange;
+      margin-top:10px;
+    }
 
-</style>
+    .delete{
+      background:red;
+      margin-top:10px;
+    }
+  </style>
 </head>
 
 <body>
@@ -68,126 +73,124 @@ margin-top:10px;
 <h1>⚡ DarkMarket Admin Panel</h1>
 
 <div class="box">
+  <h2>Add Product</h2>
 
-<h2>Add Product</h2>
+  <input type="text" id="name" placeholder="Product Name">
 
-<input type="text"
-id="name"
-placeholder="Product Name">
+  <input type="text" id="price" placeholder="Price">
 
-<input type="text"
-id="price"
-placeholder="Price">
+  <input type="text" id="image" placeholder="Image URL">
 
-<input type="text"
-id="image"
-placeholder="Image URL">
-
-<button onclick="addProduct()">
-Add Product
-</button>
-
+  <button onclick="addProduct()">Add Product</button>
 </div>
 
 <div class="box">
+  <h2>All Products</h2>
 
-<h2>All Products</h2>
-
-<div id="products"></div>
-
+  <div id="products"></div>
 </div>
 
 <script>
 
-let products=[];
+let products = JSON.parse(localStorage.getItem("products")) || [];
 
-function addProduct(){
+function saveProducts(){
+  localStorage.setItem("products", JSON.stringify(products));
+}
 
-let name=
-document.getElementById("name").value;
+function showProducts(){
 
-let price=
-document.getElementById("price").value;
+  let box = document.getElementById("products");
 
-let image=
-document.getElementById("image").value;
+  box.innerHTML = "";
 
-if(name=="" || price=="" || image==""){
+  products.forEach((item,index)=>{
 
-alert("Fill all fields");
-return;
+    box.innerHTML += `
+    
+    <div class="product">
+
+      <h3>${item.name}</h3>
+
+      <p>${item.price}</p>
+
+      <img src="${item.image}">
+
+      <button class="edit" onclick="editProduct(${index})">
+      Edit
+      </button>
+
+      <button class="delete" onclick="deleteProduct(${index})">
+      Delete
+      </button>
+
+    </div>
+
+    `;
+  });
 
 }
 
-products.push({
-name,
-price,
-image
-});
+function addProduct(){
 
-localStorage.setItem(
-"products",
-JSON.stringify(products)
-);
+  let name = document.getElementById("name").value;
 
-loadProducts();
+  let price = document.getElementById("price").value;
+
+  let image = document.getElementById("image").value;
+
+  if(name=="" || price=="" || image==""){
+    alert("সব ঘর পূরণ করো");
+    return;
+  }
+
+  products.push({
+    name:name,
+    price:price,
+    image:image
+  });
+
+  saveProducts();
+
+  showProducts();
+
+  document.getElementById("name").value="";
+  document.getElementById("price").value="";
+  document.getElementById("image").value="";
 
 }
 
 function deleteProduct(index){
 
-products.splice(index,1);
+  products.splice(index,1);
 
-localStorage.setItem(
-"products",
-JSON.stringify(products)
-);
+  saveProducts();
 
-loadProducts();
+  showProducts();
 
 }
 
-function loadProducts(){
+function editProduct(index){
 
-let data=
-localStorage.getItem("products");
+  let newName = prompt("New Product Name", products[index].name);
 
-if(data){
+  let newPrice = prompt("New Price", products[index].price);
 
-products=JSON.parse(data);
+  let newImage = prompt("New Image URL", products[index].image);
 
-}
+  products[index] = {
+    name:newName,
+    price:newPrice,
+    image:newImage
+  };
 
-let html="";
+  saveProducts();
 
-products.forEach((item,index)=>{
-
-html += `
-
-<div class="product">
-
-<h3>${item.name}</h3>
-
-<p>৳ ${item.price}</p>
-
-<img src="${item.image}">
-
-<button onclick="deleteProduct(${index})">
-Delete
-</button>
-
-</div>
-
-`;
-
-});
-
-document.getElementById("products")
-.innerHTML=html;
+  showProducts();
 
 }
 
-loadProducts();
+showProducts();
 
 </script>
 
