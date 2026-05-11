@@ -44,13 +44,13 @@ display:none;
 display:block;
 }
 
-.history-box{
+.history-box,
+.order-box{
 background:#111;
 padding:25px;
 margin:20px;
 border-radius:20px;
 font-size:22px;
-text-align:center;
 }
 
 .support-box{
@@ -151,4 +151,18 @@ border-radius:20px;
 text-align:center;
 font-size:20px;
 margin:20px;
+}
+
+.order-box input,
+.order-box select{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:15px;
+background:#222;
+color:white;
+font-size:18px;
+box-sizing:border-box;
+outline:none;
 }
