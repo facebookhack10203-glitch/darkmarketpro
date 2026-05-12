@@ -14,6 +14,7 @@ if(
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DarkMarketPro</title>
+
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
 
@@ -21,20 +22,25 @@ if(
 .page {
     display: none;
 }
+
 .page.active {
     display: block;
 }
-.order-box, .history-box {
+
+.order-box,
+.history-box {
     background: #111;
     padding: 25px;
     margin: 20px;
     border-radius: 20px;
     font-size: 22px;
 }
+
 .support-box {
     padding: 30px;
     text-align: center;
 }
+
 .support-btn {
     display: inline-block;
     padding: 18px 25px;
@@ -45,7 +51,9 @@ if(
     font-size: 22px;
     font-weight: bold;
 }
-.order-box input, .order-box select {
+
+.order-box input,
+.order-box select {
     width: 100%;
     padding: 15px;
     margin-top: 15px;
@@ -56,10 +64,12 @@ if(
     font-size: 18px;
     box-sizing: border-box;
 }
+
 .install-box {
     text-align: center;
     margin-top: 10px;
 }
+
 #installBtn {
     background: #007bff;
     color: white;
@@ -88,13 +98,17 @@ if(
 
 <!-- HOME PAGE -->
 <div id="homePage" class="page active">
+
     <div class="search-box">
         <input type="text" placeholder="🔎 Search Products">
     </div>
-    <div id="categoriesContainer">
-    </div>
+
+    <div id="categoriesContainer"></div>
+
     <!-- Banner Ad -->
-    <script>
+    <div style="text-align:center; margin-top:15px;">
+
+        <script>
         atOptions = {
             'key' : 'd8c5d9173be4304cf9c10eb0d88a92f4',
             'format' : 'iframe',
@@ -102,88 +116,169 @@ if(
             'width' : 320,
             'params' : {}
         };
-    </script>
-    <script src="https://www.highperformanceformat.com/d8c5d9173be4304cf9c10eb0d88a92f4/invoke.js"></script>
+        </script>
+
+        <script src="https://www.highperformanceformat.com/d8c5d9173be4304cf9c10eb0d88a92f4/invoke.js"></script>
+
+    </div>
+
 </div>
 
 <!-- HISTORY PAGE -->
 <div id="historyPage" class="page">
-    <div class="history-box" id="historyContent">
+
+    <div class="history-box"
+    id="historyContent">
+
         এখনো পর্যন্ত কোনো অর্ডার করা হয়নি
+
     </div>
+
 </div>
 
 <!-- SUPPORT PAGE -->
 <div id="supportPage" class="page">
+
     <div class="support-box">
-        <a class="support-btn" href="https://t.me/Yangchun11" target="_blank">
-            📩 Telegram Support
+
+        <a class="support-btn"
+        href="https://t.me/Yangchun11"
+        target="_blank">
+
+        📩 Telegram Support
+
         </a>
+
     </div>
+
 </div>
 
 <!-- ORDER PAGE -->
 <div id="orderPage" class="page">
+
     <div class="order-box">
+
         <h2>Order Form</h2>
-        <input type="text" id="fullName" placeholder="Full Name">
-        <input type="text" id="district" placeholder="District">
-        <input type="text" id="village" placeholder="Village">
-        <input type="text" id="phone" placeholder="Phone Number">
-        <button class="buy-btn" onclick="continuePayment()">
-            Continue Payment
+
+        <input type="text"
+        id="fullName"
+        placeholder="Full Name">
+
+        <input type="text"
+        id="district"
+        placeholder="District">
+
+        <input type="text"
+        id="village"
+        placeholder="Village">
+
+        <input type="text"
+        id="phone"
+        placeholder="Phone Number">
+
+        <button class="buy-btn"
+        onclick="continuePayment()">
+
+        Continue Payment
+
         </button>
+
     </div>
+
 </div>
 
 <!-- PAYMENT PAGE -->
 <div id="paymentPage" class="page">
+
     <div class="order-box">
+
         <h2>Payment</h2>
-        <p>শুধুমাত্র Send Money গ্রহণ করা হয়</p>
+
+        <p>
+        শুধুমাত্র Send Money গ্রহণ করা হয়
+        </p>
+
         <h2 id="bkashNumber">
-            01944875610
+        01944875610
         </h2>
-        <button class="buy-btn" onclick="copyNumber()">
-            Copy Number
+
+        <button class="buy-btn"
+        onclick="copyNumber()">
+
+        Copy Number
+
         </button>
-        <input type="text" id="trxid" placeholder="Enter Transaction ID">
+
+        <input type="text"
+        id="trxid"
+        placeholder="Enter Transaction ID">
+
         <select id="paymentMethod">
-            <option value="bKash">bKash</option>
+
+            <option value="bKash">
+            bKash
+            </option>
+
         </select>
-        <button class="buy-btn" onclick="submitOrder()">
-            Submit Order
+
+        <button class="buy-btn"
+        onclick="submitOrder()">
+
+        Submit Order
+
         </button>
+
     </div>
+
 </div>
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
+
     <button onclick="showPage('homePage')">
-        🏠 Home
+    🏠 Home
     </button>
+
     <button onclick="showPage('historyPage')">
-        📜 History
+    📜 History
     </button>
+
     <button onclick="showPage('supportPage')">
-        🛠 Support
+    🛠 Support
     </button>
+
 </div>
+
+<!-- Popunder Ad -->
+<script src="https://pl29423403.profitablecpmratenetwork.com/ce/89/fc/ce89fcceb678a3bb4b6985bae3ca3389.js"></script>
 
 <!-- Social Bar -->
 <script src="https://pl29423358.profitablecpmratenetwork.com/f9/a5/61/f9a5615ba9d2b8cc76eb64ac2bc1d630.js"></script>
 
 <script>
+
 function showPage(pageId){
-    document.querySelectorAll('.page').forEach(page => {
+
+    document.querySelectorAll('.page')
+    .forEach(page=>{
+
         page.classList.remove('active');
+
     });
-    document.getElementById(pageId).classList.add('active');
+
+    document.getElementById(pageId)
+    .classList.add('active');
+
 }
 
 if('serviceWorker' in navigator){
-    navigator.serviceWorker.register('service-worker.js');
+
+    navigator.serviceWorker.register(
+    'service-worker.js'
+    );
+
 }
+
 </script>
 
 <script src="script.js"></script>
