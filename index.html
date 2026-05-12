@@ -4,90 +4,71 @@
 <head>
 
 <script>
-
 if(
 !localStorage.getItem("userName")
 ){
-
-window.location.href =
-"register.html";
-
+    window.location.href = "register.html";
 }
-
 </script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>DarkMarketPro</title>
-
 <link rel="stylesheet" href="style.css">
-
 <link rel="manifest" href="manifest.json">
 
 <style>
-
-.page{
-display:none;
+.page {
+    display: none;
 }
-
-.page.active{
-display:block;
+.page.active {
+    display: block;
 }
-
-.order-box,
-.history-box{
-background:#111;
-padding:25px;
-margin:20px;
-border-radius:20px;
-font-size:22px;
+.order-box, .history-box {
+    background: #111;
+    padding: 25px;
+    margin: 20px;
+    border-radius: 20px;
+    font-size: 22px;
 }
-
-.support-box{
-padding:30px;
-text-align:center;
+.support-box {
+    padding: 30px;
+    text-align: center;
 }
-
-.support-btn{
-display:inline-block;
-padding:18px 25px;
-background:#0088cc;
-color:white;
-text-decoration:none;
-border-radius:15px;
-font-size:22px;
-font-weight:bold;
+.support-btn {
+    display: inline-block;
+    padding: 18px 25px;
+    background: #0088cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 22px;
+    font-weight: bold;
 }
-
-.order-box input,
-.order-box select{
-width:100%;
-padding:15px;
-margin-top:15px;
-border:none;
-border-radius:15px;
-background:#222;
-color:white;
-font-size:18px;
-box-sizing:border-box;
+.order-box input, .order-box select {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 15px;
+    background: #222;
+    color: white;
+    font-size: 18px;
+    box-sizing: border-box;
 }
-
-.install-box{
-text-align:center;
-margin-top:10px;
+.install-box {
+    text-align: center;
+    margin-top: 10px;
 }
-
-#installBtn{
-background:#007bff;
-color:white;
-border:none;
-padding:10px 18px;
-border-radius:12px;
-font-size:16px;
-font-weight:bold;
+#installBtn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
 }
-
 </style>
 
 </head>
@@ -95,188 +76,114 @@ font-weight:bold;
 <body>
 
 <div class="header">
-DarkMarketPro
+    DarkMarketPro
 </div>
 
 <!-- INSTALL BUTTON -->
-
 <div class="install-box">
-
-<button id="installBtn">
-⬇ Install App
-</button>
-
+    <button id="installBtn">
+        ⬇ Install App
+    </button>
 </div>
 
 <!-- HOME PAGE -->
-
 <div id="homePage" class="page active">
-
-<div class="search-box">
-
-<input type="text"
-placeholder="🔎 Search Products">
-
-</div>
-
-<div id="categoriesContainer">
-
-</div>
-
+    <div class="search-box">
+        <input type="text" placeholder="🔎 Search Products">
+    </div>
+    <div id="categoriesContainer">
+    </div>
+    <!-- Banner Ad -->
+    <script>
+        atOptions = {
+            'key' : 'd8c5d9173be4304cf9c10eb0d88a92f4',
+            'format' : 'iframe',
+            'height' : 50,
+            'width' : 320,
+            'params' : {}
+        };
+    </script>
+    <script src="https://www.highperformanceformat.com/d8c5d9173be4304cf9c10eb0d88a92f4/invoke.js"></script>
 </div>
 
 <!-- HISTORY PAGE -->
-
 <div id="historyPage" class="page">
-
-<div class="history-box"
-id="historyContent">
-
-এখনো পর্যন্ত কোনো অর্ডার করা হয়নি
-
-</div>
-
+    <div class="history-box" id="historyContent">
+        এখনো পর্যন্ত কোনো অর্ডার করা হয়নি
+    </div>
 </div>
 
 <!-- SUPPORT PAGE -->
-
 <div id="supportPage" class="page">
-
-<div class="support-box">
-
-<a class="support-btn"
-href="https://t.me/Yangchun11"
-target="_blank">
-
-📩 Telegram Support
-
-</a>
-
-</div>
-
+    <div class="support-box">
+        <a class="support-btn" href="https://t.me/Yangchun11" target="_blank">
+            📩 Telegram Support
+        </a>
+    </div>
 </div>
 
 <!-- ORDER PAGE -->
-
 <div id="orderPage" class="page">
-
-<div class="order-box">
-
-<h2>Order Form</h2>
-
-<input type="text"
-id="fullName"
-placeholder="Full Name">
-
-<input type="text"
-id="district"
-placeholder="District">
-
-<input type="text"
-id="village"
-placeholder="Village">
-
-<input type="text"
-id="phone"
-placeholder="Phone Number">
-
-<button class="buy-btn"
-onclick="continuePayment()">
-
-Continue Payment
-
-</button>
-
-</div>
-
+    <div class="order-box">
+        <h2>Order Form</h2>
+        <input type="text" id="fullName" placeholder="Full Name">
+        <input type="text" id="district" placeholder="District">
+        <input type="text" id="village" placeholder="Village">
+        <input type="text" id="phone" placeholder="Phone Number">
+        <button class="buy-btn" onclick="continuePayment()">
+            Continue Payment
+        </button>
+    </div>
 </div>
 
 <!-- PAYMENT PAGE -->
-
 <div id="paymentPage" class="page">
-
-<div class="order-box">
-
-<h2>Payment</h2>
-
-<p>
-শুধুমাত্র Send Money গ্রহণ করা হয়
-</p>
-
-<h2 id="bkashNumber">
-01944875610
-</h2>
-
-<button class="buy-btn"
-onclick="copyNumber()">
-
-Copy Number
-
-</button>
-
-<input type="text"
-id="trxid"
-placeholder="Enter Transaction ID">
-
-<select id="paymentMethod">
-
-<option value="bKash">
-bKash
-</option>
-
-</select>
-
-<button class="buy-btn"
-onclick="submitOrder()">
-
-Submit Order
-
-</button>
-
-</div>
-
+    <div class="order-box">
+        <h2>Payment</h2>
+        <p>শুধুমাত্র Send Money গ্রহণ করা হয়</p>
+        <h2 id="bkashNumber">
+            01944875610
+        </h2>
+        <button class="buy-btn" onclick="copyNumber()">
+            Copy Number
+        </button>
+        <input type="text" id="trxid" placeholder="Enter Transaction ID">
+        <select id="paymentMethod">
+            <option value="bKash">bKash</option>
+        </select>
+        <button class="buy-btn" onclick="submitOrder()">
+            Submit Order
+        </button>
+    </div>
 </div>
 
 <!-- BOTTOM NAV -->
-
 <div class="bottom-nav">
-
-<button onclick="showPage('homePage')">
-🏠 Home
-</button>
-
-<button onclick="showPage('historyPage')">
-📜 History
-</button>
-
-<button onclick="showPage('supportPage')">
-🛠 Support
-</button>
-
+    <button onclick="showPage('homePage')">
+        🏠 Home
+    </button>
+    <button onclick="showPage('historyPage')">
+        📜 History
+    </button>
+    <button onclick="showPage('supportPage')">
+        🛠 Support
+    </button>
 </div>
 
+<!-- Social Bar -->
+<script src="https://pl29423358.profitablecpmratenetwork.com/f9/a5/61/f9a5615ba9d2b8cc76eb64ac2bc1d630.js"></script>
+
 <script>
-
 function showPage(pageId){
-
-document.querySelectorAll('.page')
-.forEach(page=>{
-page.classList.remove('active');
-});
-
-document.getElementById(pageId)
-.classList.add('active');
-
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+    document.getElementById(pageId).classList.add('active');
 }
 
 if('serviceWorker' in navigator){
-
-navigator.serviceWorker.register(
-'service-worker.js'
-);
-
+    navigator.serviceWorker.register('service-worker.js');
 }
-
 </script>
 
 <script src="script.js"></script>
